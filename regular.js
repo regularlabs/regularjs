@@ -13,9 +13,9 @@
 
 if (typeof window.Regular == 'undefined'
 	|| typeof Regular.version == 'undefined'
-	|| Regular.version < 1.0) {
+	|| Regular.version < 1.1) {
 	window.Regular = {
-		version: 1.0,
+		version: 1.1,
 
 		addClass: function(el, clss) {
 			if (!el) {
@@ -24,7 +24,7 @@ if (typeof window.Regular == 'undefined'
 
 			el.className += ' ' + clss;
 
-			var classes = el.className.split(' ');
+			let classes = el.className.split(' ');
 
 			classes = classes.filter(function(value, index, classes) {
 				return classes.indexOf(value) === index;
@@ -38,7 +38,7 @@ if (typeof window.Regular == 'undefined'
 				return;
 			}
 
-			var classes = el.className.split(' ');
+			let classes = el.className.split(' ');
 
 			classes = classes.filter(function(value, index, classes) {
 				return classes.indexOf(value) === index;
@@ -46,8 +46,8 @@ if (typeof window.Regular == 'undefined'
 
 			remove_classes = remove_classes.split(' ');
 
-			for (var i in remove_classes) {
-				var index = classes.indexOf(remove_classes[i]);
+			for (let i in remove_classes) {
+				const index = classes.indexOf(remove_classes[i]);
 
 				if (index != -1) {
 					classes.splice(index, 1);
@@ -62,7 +62,7 @@ if (typeof window.Regular == 'undefined'
 				return false;
 			}
 
-			var classes = el.className.split(' ');
+			const classes = el.className.split(' ');
 
 			return classes.indexOf(clss) > -1;
 		},
@@ -93,16 +93,14 @@ if (typeof window.Regular == 'undefined'
 			el.style.display = 'none';
 		},
 
-		fadeIn: function(el, duration, oncomplete) {
+		fadeIn: function(el, duration = 250, oncomplete = '') {
 			el.setAttribute('data-fading', 'in');
 
-			var self = this;
+			const self = this;
 
-			duration = duration ? duration : 250; // total time to fade from 1 to 0 opacity
-
-			var wait        = 50; // amount of time between steps
-			var nr_of_steps = duration / wait;
-			var change      = 1 / nr_of_steps; // time to wait before next step
+			const wait        = 50; // amount of time between steps
+			const nr_of_steps = duration / wait;
+			const change      = 1 / nr_of_steps; // time to wait before next step
 
 			if (!el.style.opacity || el.style.opacity == 1) {
 				el.style.opacity = 0;
@@ -130,16 +128,14 @@ if (typeof window.Regular == 'undefined'
 			})();
 		},
 
-		fadeOut: function(el, duration, oncomplete) {
+		fadeOut: function(el, duration = 250, oncomplete = '') {
 			el.setAttribute('data-fading', 'out');
 
-			var self = this;
+			const self = this;
 
-			duration = duration ? duration : 250; // total time to fade from 1 to 0 opacity
-
-			var wait        = 50; // amount of time between steps
-			var nr_of_steps = duration / wait;
-			var change      = 1 / nr_of_steps; // time to wait before next step
+			const wait        = 50; // amount of time between steps
+			const nr_of_steps = duration / wait;
+			const change      = 1 / nr_of_steps; // time to wait before next step
 
 			if (!el.style.opacity || el.style.opacity == 0) {
 				el.style.opacity = 1;
@@ -170,16 +166,19 @@ if (typeof window.Regular == 'undefined'
 				: func();
 		},
 
-		loadUrl: function(url, success, fail) {
-			var xhttp = new XMLHttpRequest();
+		loadUrl: function(url, data, success = '', fail = '') {
+			const xhttp = new XMLHttpRequest();
+
+			xhttp.open("POST", url, true);
+
+			xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
 			xhttp.onreadystatechange = function() {
 				if (this.readyState != 4) {
 					return;
 				}
 
-				var data   = this.responseText;
-				var result = this.responseText;
+				let data = result = this.responseText;
 
 				if (this.status == 200) {
 					if (success) {
@@ -193,8 +192,7 @@ if (typeof window.Regular == 'undefined'
 				}
 			};
 
-			xhttp.open("GET", url, true);
-			xhttp.send();
+			xhttp.send(data);
 		},
 	};
 }
