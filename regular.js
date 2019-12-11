@@ -1,5 +1,5 @@
 /**
- * @package         RegularJS
+ * @package         Regular.js
  * @description     A light and simple JavaScript Library
  *
  * @author          Peter van Westen <info@regularlabs.com>
@@ -23,7 +23,7 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 * @param el        An element object
 		 * @param classes   A string or array of class names
-		 * @param matchAll  A boolean whether the element should have all given classes or at least one.
+		 * @param matchAll  Optional boolean whether the element should have all given classes (true) or at least one (false)
 		 *
 		 * @return boolean
 		 */
@@ -64,7 +64,7 @@ if (typeof window.Regular === 'undefined'
 		},
 
 		/**
-		 * Removes given class name(s) to the element
+		 * Removes given class name(s) from the element
 		 *
 		 * @param el       An element object
 		 * @param classes  A string or array of class names
@@ -74,7 +74,7 @@ if (typeof window.Regular === 'undefined'
 		},
 
 		/**
-		 * Toggles given class name(s) to the element
+		 * Toggles given class name(s) of the element
 		 *
 		 * @param el       An element object
 		 * @param classes  A string or array of class names
@@ -105,7 +105,7 @@ if (typeof window.Regular === 'undefined'
 		},
 
 		/**
-		 * Shows the given element (switches to display: block)
+		 * Shows the given element (changes opacity and display attributes)
 		 *
 		 * @param el  An element object
 		 *
@@ -120,7 +120,7 @@ if (typeof window.Regular === 'undefined'
 		},
 
 		/**
-		 * Hides the given element (switches to display: none)
+		 * Hides the given element (changes opacity and display attributes)
 		 *
 		 * @param el  An element object
 		 */
@@ -133,8 +133,8 @@ if (typeof window.Regular === 'undefined'
 		 * Fades in the the given element
 		 *
 		 * @param el An       element object
-		 * @param duration    The duration of the effect in milliseconds
-		 * @param oncomplete  Callback function to execute when effect is completed
+		 * @param duration    Optional duration of the effect in milliseconds
+		 * @param oncomplete  Optional callback function to execute when effect is completed
 		 */
 		fadeIn: function(el, duration = 250, oncomplete = '') {
 			el.setAttribute('data-fading', 'in');
@@ -175,8 +175,8 @@ if (typeof window.Regular === 'undefined'
 		 * Fades out the the given element
 		 *
 		 * @param el          An element object
-		 * @param duration    The duration of the effect in milliseconds
-		 * @param oncomplete  Callback function to execute when effect is completed
+		 * @param duration    Optional duration of the effect in milliseconds
+		 * @param oncomplete  Optional callback function to execute when effect is completed
 		 */
 		fadeOut: function(el, duration = 250, oncomplete = '') {
 			el.setAttribute('data-fading', 'out');
@@ -241,17 +241,18 @@ if (typeof window.Regular === 'undefined'
 		 * @param fail     Optional callback function to execute when the url fails to load
 		 */
 		loadUrl: function(url, data = '', success = '', fail = '') {
-			const xhttp = new XMLHttpRequest();
+			const request = new XMLHttpRequest();
 
-			xhttp.open("POST", url, true);
+			request.open("POST", url, true);
 
-			xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-			xhttp.onreadystatechange = function() {
+			request.onreadystatechange = function() {
 				if (this.readyState != 4) {
 					return;
 				}
 
+				// data and result can be used in the callback functions to reference the response
 				let data   = this.responseText;
 				let result = this.responseText;
 
@@ -267,7 +268,7 @@ if (typeof window.Regular === 'undefined'
 				}
 			};
 
-			xhttp.send(data);
+			request.send(data);
 		},
 
 		/**
