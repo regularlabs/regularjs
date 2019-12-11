@@ -1,6 +1,22 @@
 # Regular.js
 
-A light and simple JavaScript Library
+##*A light and simple JavaScript Library*
+
+This library contains a number of simply static javascript functions.
+
+- Functions
+  * [hasClasses](#hasclasses)
+  * [addClasses](#addclasses)
+  * [removeClasses](#removeclasses)
+  * [toggleClasses](#toggleclasses)
+  * [show](#show)
+  * [hide](#hide)
+  * [fadeIn](#fadein)
+  * [fadeOut](#fadeout)
+  * [createElementFromHTML](#createelementfromhtml)
+  * [onReady](#onready)
+  * [loadUrl](#loadurl)
+- [Aliases](#aliases)
 
 
 ## hasClasses
