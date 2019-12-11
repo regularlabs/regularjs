@@ -4,19 +4,18 @@
 
 This library contains a number of simply static javascript functions.
 
-[hasClasses](#hasclasses)
-
-[addClasses](#addclasses)
-[removeClasses](#removeclasses)
-[toggleClasses](#toggleclasses)
-[show](#show)
-[hide](#hide)
-[fadeIn](#fadein)
-[fadeOut](#fadeout)
-[createElementFromHTML](#createelementfromhtml)
-[onReady](#onready)
-[loadUrl](#loadurl)
-
+[hasClasses](#hasclasses)<br>
+[addClasses](#addclasses)<br>
+[removeClasses](#removeclasses)<br>
+[toggleClasses](#toggleclasses)<br>
+[show](#show)<br>
+[hide](#hide)<br>
+[fadeIn](#fadein)<br>
+[fadeOut](#fadeout)<br>
+[createElementFromHTML](#createelementfromhtml)<br>
+[onReady](#onready)<br>
+[loadUrl](#loadurl)<br>
+<br>
 [Aliases](#aliases)
 
 
