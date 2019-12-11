@@ -20,10 +20,14 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Returns a boolean based on whether the element contains one or more of the given class names
-		 * @param el       An element object
-		 * @param classes  A string or array of class names
+		 *
+		 * @param el        An element object
+		 * @param classes   A string or array of class names
+		 * @param matchAll  A boolean whether the element should have all given classes or at least one.
+		 *
+		 * @return boolean
 		 */
-		hasClasses: function(el, classes) {
+		hasClasses: function(el, classes, matchAll = true) {
 			if (!el) {
 				return false;
 			}
@@ -32,17 +36,26 @@ if (typeof window.Regular === 'undefined'
 				classes = classes.split(' ');
 			}
 
+			let hasClass = false;
+
 			for (let i in classes) {
-				if (el.classList.contains(classes[i])) {
+				hasClass = el.classList.contains(classes[i]);
+
+				if (matchAll && !hasClass) {
+					return false;
+				}
+
+				if (!matchAll && hasClass) {
 					return true;
 				}
 			}
 
-			return false;
+			return hasClass;
 		},
 
 		/**
 		 * Adds given class name(s) to the element
+		 *
 		 * @param el       An element object
 		 * @param classes  A string or array of class names
 		 */
@@ -52,6 +65,7 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Removes given class name(s) to the element
+		 *
 		 * @param el       An element object
 		 * @param classes  A string or array of class names
 		 */
@@ -61,6 +75,7 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Toggles given class name(s) to the element
+		 *
 		 * @param el       An element object
 		 * @param classes  A string or array of class names
 		 */
@@ -70,13 +85,14 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Executes an action on the element to add/remove/toggle classes
+		 *
 		 * @param action  A string that identifies the action: add|remove|toggle
 		 * @param el      An element object
 		 * @param action  A string or array of class names
 		 */
 		doClasses: function(action, el, classes) {
 			if (!el) {
-				return;
+				return el;
 			}
 
 			if (typeof classes === 'string') {
@@ -90,7 +106,10 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Shows the given element (switches to display: block)
+		 *
 		 * @param el  An element object
+		 *
+		 * @return element
 		 */
 		show: function(el) {
 			el.style.opacity = 1;
@@ -102,6 +121,7 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Hides the given element (switches to display: none)
+		 *
 		 * @param el  An element object
 		 */
 		hide: function(el) {
@@ -111,6 +131,7 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Fades in the the given element
+		 *
 		 * @param el An       element object
 		 * @param duration    The duration of the effect in milliseconds
 		 * @param oncomplete  Callback function to execute when effect is completed
@@ -152,8 +173,9 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Fades out the the given element
+		 *
 		 * @param el          An element object
-		 * @param duration    The duration of the effect in miliseconds
+		 * @param duration    The duration of the effect in milliseconds
 		 * @param oncomplete  Callback function to execute when effect is completed
 		 */
 		fadeOut: function(el, duration = 250, oncomplete = '') {
@@ -190,6 +212,7 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Runs a function when the document is loaded (on ready state)
+		 *
 		 * @param func  Callback function to execute when document is ready
 		 */
 		onReady: function(func) {
@@ -200,7 +223,10 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Converts a string with HTML code to 'DOM' elements
+		 *
 		 * @param html  String with HTML code
+		 *
+		 * @return element
 		 */
 		createElementFromHTML: function(html) {
 			return document.createRange().createContextualFragment(html);
@@ -208,6 +234,7 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Loads a url with POST data and optionally calls a function hen ready
+		 *
 		 * @param url      String containing the url to load
 		 * @param data     Optional string representing the POST data to send along
 		 * @param success  Optional callback function to execute when the url loads successfully (status 200)
@@ -245,17 +272,13 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Alias of Regular.hasClass
-		 * @param el       An element object
-		 * @param classes  A string or array of class names
 		 */
-		hasClass: function(el, classes) {
-			return this.hasClasses(el, classes);
+		hasClass: function(el, classes, matchAll = false) {
+			return this.hasClasses(el, classes, matchAll);
 		},
 
 		/**
 		 * Alias of Regular.addClasses
-		 * @param el       An element object
-		 * @param classes  A string or array of class names
 		 */
 		addClass: function(el, classes) {
 			this.addClasses(el, classes);
@@ -263,8 +286,6 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Alias of Regular.removeClasses
-		 * @param el       An element object
-		 * @param classes  A string or array of class names
 		 */
 		removeClass: function(el, classes) {
 			this.removeClasses(el, classes);
@@ -272,8 +293,6 @@ if (typeof window.Regular === 'undefined'
 
 		/**
 		 * Alias of Regular.toggleClasses
-		 * @param el       An element object
-		 * @param classes  A string or array of class names
 		 */
 		toggleClass: function(el, classes) {
 			this.toggleClasses(el, classes);
