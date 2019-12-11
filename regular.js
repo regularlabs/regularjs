@@ -11,75 +11,87 @@
 /*jslint node: true */
 "use strict";
 
-if (typeof window.Regular == 'undefined'
-	|| typeof Regular.version == 'undefined'
+if (typeof window.Regular === 'undefined'
+	|| typeof Regular.version === 'undefined'
 	|| Regular.version < 1.1) {
+
 	window.Regular = {
 		version: 1.1,
 
-		addClass: function(el, clss) {
-			if (!el) {
-				return;
-			}
-
-			el.className += ' ' + clss;
-
-			let classes = el.className.split(' ');
-
-			classes = classes.filter(function(value, index, classes) {
-				return classes.indexOf(value) === index;
-			});
-
-			el.className = classes.join(' ');
-		},
-
-		removeClass: function(el, remove_classes) {
-			if (!el) {
-				return;
-			}
-
-			let classes = el.className.split(' ');
-
-			classes = classes.filter(function(value, index, classes) {
-				return classes.indexOf(value) === index;
-			});
-
-			remove_classes = remove_classes.split(' ');
-
-			for (let i in remove_classes) {
-				const index = classes.indexOf(remove_classes[i]);
-
-				if (index != -1) {
-					classes.splice(index, 1);
-				}
-			}
-
-			el.className = classes.join(' ');
-		},
-
-		hasClass: function(el, clss) {
+		/**
+		 * Returns a boolean based on whether the element contains one or more of the given class names
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		hasClasses: function(el, classes) {
 			if (!el) {
 				return false;
 			}
 
-			const classes = el.className.split(' ');
+			if (typeof classes === 'string') {
+				classes = classes.split(' ');
+			}
 
-			return classes.indexOf(clss) > -1;
+			for (let i in classes) {
+				if (el.classList.contains(classes[i])) {
+					return true;
+				}
+			}
+
+			return false;
 		},
 
-		toggleClass: function(el, clss) {
+		/**
+		 * Adds given class name(s) to the element
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		addClasses: function(el, classes) {
+			this.doClasses('add', el, classes);
+		},
+
+		/**
+		 * Removes given class name(s) to the element
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		removeClasses: function(el, classes) {
+			this.doClasses('remove', el, classes);
+		},
+
+		/**
+		 * Toggles given class name(s) to the element
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		toggleClasses: function(el, classes) {
+			this.doClasses('toggle', el, classes);
+		},
+
+		/**
+		 * Executes an action on the element to add/remove/toggle classes
+		 * @param action  A string that identifies the action: add|remove|toggle
+		 * @param el      An element object
+		 * @param action  A string or array of class names
+		 */
+		doClasses: function(action, el, classes) {
 			if (!el) {
 				return;
 			}
 
-			if (this.hasClass(el, clss)) {
-				this.removeClass(el, clss);
-				return;
+			if (typeof classes === 'string') {
+				classes = classes.split(' ');
 			}
 
-			this.addClass(el, clss);
+			for (let i in classes) {
+				el.classList[action](classes[i]);
+			}
 		},
 
+		/**
+		 * Shows the given element (switches to display: block)
+		 * @param el  An element object
+		 */
 		show: function(el) {
 			el.style.opacity = 1;
 
@@ -88,11 +100,21 @@ if (typeof window.Regular == 'undefined'
 			}
 		},
 
+		/**
+		 * Hides the given element (switches to display: none)
+		 * @param el  An element object
+		 */
 		hide: function(el) {
 			el.style.opacity = 0;
 			el.style.display = 'none';
 		},
 
+		/**
+		 * Fades in the the given element
+		 * @param el An       element object
+		 * @param duration    The duration of the effect in milliseconds
+		 * @param oncomplete  Callback function to execute when effect is completed
+		 */
 		fadeIn: function(el, duration = 250, oncomplete = '') {
 			el.setAttribute('data-fading', 'in');
 
@@ -128,6 +150,12 @@ if (typeof window.Regular == 'undefined'
 			})();
 		},
 
+		/**
+		 * Fades out the the given element
+		 * @param el          An element object
+		 * @param duration    The duration of the effect in miliseconds
+		 * @param oncomplete  Callback function to execute when effect is completed
+		 */
 		fadeOut: function(el, duration = 250, oncomplete = '') {
 			el.setAttribute('data-fading', 'out');
 
@@ -160,13 +188,32 @@ if (typeof window.Regular == 'undefined'
 			})();
 		},
 
+		/**
+		 * Runs a function when the document is loaded (on ready state)
+		 * @param func  Callback function to execute when document is ready
+		 */
 		onReady: function(func) {
 			/in/.test(document.readyState)
-				? setTimeout('Regular.onReady(' + func + ')', 9)
+				? setTimeout(`Regular.onReady(${func})`, 9)
 				: func();
 		},
 
-		loadUrl: function(url, data, success = '', fail = '') {
+		/**
+		 * Converts a string with HTML code to 'DOM' elements
+		 * @param html  String with HTML code
+		 */
+		createElementFromHTML: function(html) {
+			return document.createRange().createContextualFragment(html);
+		},
+
+		/**
+		 * Loads a url with POST data and optionally calls a function hen ready
+		 * @param url      String containing the url to load
+		 * @param data     Optional string representing the POST data to send along
+		 * @param success  Optional callback function to execute when the url loads successfully (status 200)
+		 * @param fail     Optional callback function to execute when the url fails to load
+		 */
+		loadUrl: function(url, data = '', success = '', fail = '') {
 			const xhttp = new XMLHttpRequest();
 
 			xhttp.open("POST", url, true);
@@ -178,21 +225,58 @@ if (typeof window.Regular == 'undefined'
 					return;
 				}
 
-				let data = result = this.responseText;
+				let data   = this.responseText;
+				let result = this.responseText;
 
 				if (this.status == 200) {
 					if (success) {
-						eval(success + ';');
+						eval(`${success};`);
 					}
 					return;
 				}
 
 				if (fail) {
-					eval(fail + ';');
+					eval(`${fail};`);
 				}
 			};
 
 			xhttp.send(data);
+		},
+
+		/**
+		 * Alias of Regular.hasClass
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		hasClass: function(el, classes) {
+			return this.hasClasses(el, classes);
+		},
+
+		/**
+		 * Alias of Regular.addClasses
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		addClass: function(el, classes) {
+			this.addClasses(el, classes);
+		},
+
+		/**
+		 * Alias of Regular.removeClasses
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		removeClass: function(el, classes) {
+			this.removeClasses(el, classes);
+		},
+
+		/**
+		 * Alias of Regular.toggleClasses
+		 * @param el       An element object
+		 * @param classes  A string or array of class names
+		 */
+		toggleClass: function(el, classes) {
+			this.toggleClasses(el, classes);
 		},
 	};
 }
