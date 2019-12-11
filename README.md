@@ -1,6 +1,6 @@
 # Regular.js
 
-##*A light and simple JavaScript Library*
+### *A light and simple JavaScript Library*
 
 This library contains a number of simply static javascript functions.
 
