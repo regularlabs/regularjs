@@ -5,6 +5,7 @@
 This library contains a number of simply static javascript functions.
 
 [hasClasses](#hasclasses)
+
 [addClasses](#addclasses)
 [removeClasses](#removeclasses)
 [toggleClasses](#toggleclasses)
