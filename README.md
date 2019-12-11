@@ -1,4 +1,4 @@
-# RegularJS
+# Regular.js
 
 A light and simple JavaScript Library
 
