@@ -315,7 +315,7 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Loads a url with POST data and optionally calls a function hen ready.
+		 * Loads a url with optional POST data and optionally calls a function on success or fail.
 		 *
 		 * @param url      String containing the url to load.
 		 * @param data     Optional string representing the POST data to send along.
@@ -351,24 +351,10 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 */
 
-		/**
-		 * Alias of Regular.hasClass
-		 */
-		this.hasClass = this.hasClasses;
-
-		/**
-		 * Alias of Regular.addClasses
-		 */
-		this.addClass = this.addClasses;
-
-		/**
-		 * Alias of Regular.removeClasses
-		 */
+		this.as = this.alias;
+		this.hasClass    = this.hasClasses;
+		this.addClass    = this.addClasses;
 		this.removeClass = this.removeClasses;
-
-		/**
-		 * Alias of Regular.toggleClasses
-		 */
 		this.toggleClass = this.toggleClasses;
 
 		/**
