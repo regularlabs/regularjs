@@ -27,12 +27,12 @@ Returns a boolean based on whether the element contains one or more of the given
 #### Syntax
 
 ```javascript
-elementHasClass = Regular.hasClasses(el, classes, true)
+elementHasClass = Regular.hasClasses(selector, classes, true)
 ```
 
 | Parameter  | Description                                                                        | Default |
 | ---------- | ---------------------------------------------------------------------------------- | :-----: |
-| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
+| `selector` | A CSS selector string or a HTMLElement object                                      |         |
 | `classes`  | A string or array of class names                                                   |         |
 | `matchAll` | Optional boolean whether the element should have all given classes (true) or at least one (false) | `true` |
 
@@ -69,12 +69,12 @@ Adds given class name(s) to the element
 #### Syntax
 
 ```javascript
-Regular.addClasses(el, classes)
+Regular.addClasses(selector, classes)
 ```
 
 | Parameter  | Description                                                                        |
 | ---------- | ---------------------------------------------------------------------------------- |
-| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
 | `classes`  | A string or array of class names                                                   |
 
 #### Examples
@@ -106,12 +106,12 @@ Removes given class name(s) from the element
 #### Syntax
 
 ```javascript
-Regular.removeClasses(el, classes)
+Regular.removeClasses(selector, classes)
 ```
 
 | Parameter  | Description                                                                        |
 | ---------- | ---------------------------------------------------------------------------------- |
-| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
 | `classes`  | A string or array of class names                                                   |
 
 #### Examples
@@ -143,12 +143,12 @@ Toggles given class name(s) of the element
 #### Syntax
 
 ```javascript
-Regular.toggleClasses(el, classes)
+Regular.toggleClasses(selector, classes)
 ```
 
 | Parameter  | Description                                                                        |
 | ---------- | ---------------------------------------------------------------------------------- |
-| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
 | `classes`  | A string or array of class names                                                   |
 
 #### Examples
@@ -185,7 +185,7 @@ Regular.show(el)
 
 | Parameter  | Description                                                                        |
 | ---------- | ---------------------------------------------------------------------------------- |
-| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
 
 #### Examples
 
@@ -213,7 +213,7 @@ Regular.hide(el)
 
 | Parameter  | Description                                                                        |
 | ---------- | ---------------------------------------------------------------------------------- |
-| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
 
 #### Examples
 
@@ -236,12 +236,12 @@ Fades in the the given element
 #### Syntax
 
 ```javascript
-Regular.fadeIn(el, duration, oncomplete)
+Regular.fadeIn(selector, duration, oncomplete)
 ```
 
 | Parameter    | Description                                                                        | Default |
 | ------------ | ---------------------------------------------------------------------------------- | :-----: |
-| `el`         | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
+| `selector`   | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
 | `duration`   | Optional duration of the effect in milliseconds                                    | `250`   |
 | `oncomplete` | Optional callback function to execute when effect is completed                     |         |
 
@@ -266,12 +266,12 @@ Fades out the the given element
 #### Syntax
 
 ```javascript
-Regular.fadeOut(el, duration, oncomplete)
+Regular.fadeOut(selector, duration, oncomplete)
 ```
 
 | Parameter    | Description                                                                        | Default |
 | ------------ | ---------------------------------------------------------------------------------- | :-----: |
-| `el`         | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
+| `selector`   | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
 | `duration`   | Optional duration of the effect in milliseconds                                    | `250`   |
 | `oncomplete` | Optional callback function to execute when effect is completed                     |         |
 
