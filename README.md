@@ -23,7 +23,7 @@ This library contains a number of simply static javascript functions.
 
 ## hasClasses
 
-Returns a boolean based on whether the element contains one or more of the given class names.
+Checks if the element contains one or more of the given class names.
 
 #### Syntax
 
@@ -36,6 +36,9 @@ Regular.hasClasses(selector, classes, true)
 | `selector` | A CSS selector string or a HTMLElement object.                                      |         |
 | `classes`  | A string or array of class names.                                                   |         |
 | `matchAll` | Optional boolean whether the element should have all given classes (true) or at least one (false). | `true` |
+
+##### Returns 
+`boolean` true or false based on whether the element contains one or more of the given class names.
 
 #### Examples
 
@@ -292,7 +295,7 @@ Regular.fadeOut(div, 1000, () => console.log('Faded out'));
 
 ## createElementFromHTML
 
-Converts a string with HTML code to 'DOM' elements.
+Converts a string with HTML code to a HTMLElement object.
 
 #### Syntax
 
@@ -303,6 +306,9 @@ Regular.createElementFromHTML(html)
 | Parameter    | Description            |
 | ------------ | ---------------------- |
 | `html`       | String with HTML code. |
+
+##### Returns 
+`HTMLElement` object based on the given string.
 
 #### Example
 
@@ -336,7 +342,7 @@ Regular.onReady(`console.log('Document is ready!')`);
 
 ## loadUrl
 
-Converts a string with HTML code to 'DOM' elements.
+Loads a url with optional POST data and optionally calls a function on success or fail.
 
 #### Syntax
 
@@ -375,8 +381,6 @@ Regular.loadUrl(
 
 Sets a global alias for the Regular class.
 
-*Returns false if the given alias already exists as a global variable names.*
-
 #### Syntax
 
 ```javascript
@@ -386,6 +390,9 @@ Regular.alias(word)
 | Parameter | Description                                                                |
 | --------- | -------------------------------------------------------------------------- |
 | `word`    | A string (character or word) representing the alias for the Regular class. |
+
+##### Returns
+`boolean` true if the alias is created, false if the given alias already exists as a global variable names.
 
 #### Example
 
@@ -407,3 +414,4 @@ There are some aliases for some of the functions:
 | addClass    | addClasses    |
 | removeClass | removeClasses |
 | toggleClass | toggleClasses |
+| as          | alias         |
