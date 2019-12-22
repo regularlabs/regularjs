@@ -8,28 +8,31 @@
  * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
-/*jslint node: true */
 "use strict";
 
 if (typeof window.Regular === 'undefined'
 	|| typeof Regular.version === 'undefined'
-	|| Regular.version < 1.1) {
+	|| Regular.version < 1.2) {
 
 	window.Regular = {
-		version: 1.1,
+		version: 1.2,
 
 		/**
 		 * Returns a boolean based on whether the element contains one or more of the given class names
 		 *
-		 * @param el        An element object
+		 * @param element   An element object (or id)
 		 * @param classes   A string or array of class names
 		 * @param matchAll  Optional boolean whether the element should have all given classes (true) or at least one (false)
 		 *
 		 * @return boolean
 		 */
-		hasClasses: function(el, classes, matchAll = true) {
-			if (!el) {
+		hasClasses(element, classes, matchAll = true) {
+			if (!element) {
 				return false;
+			}
+
+			if (typeof element === 'string') {
+				element = document.querySelector(`${element}`);
 			}
 
 			if (typeof classes === 'string') {
@@ -38,8 +41,8 @@ if (typeof window.Regular === 'undefined'
 
 			let hasClass = false;
 
-			for (let i in classes) {
-				hasClass = el.classList.contains(classes[i]);
+			for (const clss of classes) {
+				hasClass = element.classList.contains(clss);
 
 				if (matchAll && !hasClass) {
 					return false;
@@ -54,112 +57,221 @@ if (typeof window.Regular === 'undefined'
 		},
 
 		/**
-		 * Adds given class name(s) to the element
+		 * Adds given class name(s) to the element(s)
 		 *
-		 * @param el       An element object
+		 * @param element  An element object or nodeList of elements or a CSS query string
 		 * @param classes  A string or array of class names
 		 */
-		addClasses: function(el, classes) {
-			this.doClasses('add', el, classes);
+		addClasses(element, classes) {
+			$.doClasses('add', element, classes);
 		},
 
 		/**
-		 * Removes given class name(s) from the element
+		 * Removes given class name(s) from the element(s)
 		 *
-		 * @param el       An element object
+		 * @param element  An element object or nodeList of elements or a CSS query string
 		 * @param classes  A string or array of class names
 		 */
-		removeClasses: function(el, classes) {
-			this.doClasses('remove', el, classes);
+		removeClasses(element, classes) {
+			$.doClasses('remove', element, classes);
 		},
 
 		/**
-		 * Toggles given class name(s) of the element
+		 * Toggles given class name(s) of the element(s)
 		 *
-		 * @param el       An element object
+		 * @param element  An element object or nodeList of elements or a CSS query string
 		 * @param classes  A string or array of class names
 		 */
-		toggleClasses: function(el, classes) {
-			this.doClasses('toggle', el, classes);
+		toggleClasses(element, classes) {
+			$.doClasses('toggle', element, classes);
 		},
 
 		/**
-		 * Executes an action on the element to add/remove/toggle classes
+		 * Executes an action on the element(s) to add/remove/toggle classes
 		 *
-		 * @param action  A string that identifies the action: add|remove|toggle
-		 * @param el      An element object
-		 * @param action  A string or array of class names
+		 * @param action   A string that identifies the action: add|remove|toggle
+		 * @param element  An element object or nodeList of elements or a CSS query string
+		 * @param classes  A string or array of class names
 		 */
-		doClasses: function(action, el, classes) {
-			if (!el) {
-				return el;
+		doClasses(action, element, classes) {
+			if (!element) {
+				return;
+			}
+
+			if (typeof element === 'string') {
+				element = document.querySelectorAll(`${element}`);
+			}
+
+			if ('forEach' in element) {
+				element.forEach(subElement => $.doClasses(action, subElement, classes));
+				return;
 			}
 
 			if (typeof classes === 'string') {
 				classes = classes.split(' ');
 			}
 
-			for (let i in classes) {
-				el.classList[action](classes[i]);
+			for (const clss of classes) {
+				element.classList[action](clss);
 			}
 		},
 
 		/**
-		 * Shows the given element (changes opacity and display attributes)
+		 * Shows the given element(s) (changes opacity and display attributes)
 		 *
-		 * @param el  An element object
+		 * @param element  An element object or nodeList of elements or a CSS query string
 		 *
 		 * @return element
 		 */
-		show: function(el) {
-			el.style.opacity = 1;
-
-			if (el.style.display == 'none') {
-				el.style.display = 'block';
+		show(element) {
+			if (!element) {
+				return;
 			}
+
+			if (typeof element === 'string') {
+				element = document.querySelectorAll(`${element}`);
+			}
+
+			if ('forEach' in element) {
+				element.forEach(subElement => $.show(subElement));
+				return;
+			}
+
+			let computedDisplay = $.getComputedStyle(element, 'display');
+
+			if (!('origDisplay' in element)) {
+				element.origDisplay = computedDisplay == 'none'
+					? $.getDefaultComputedStyle(element, 'display')
+					: computedDisplay;
+			}
+
+			if (computedDisplay == 'none') {
+				element.style.display = ('origDisplay' in element) ? element.origDisplay : '';
+			}
+
+			computedDisplay = $.getComputedStyle(element, 'display');
+			if (computedDisplay == 'none') {
+				element.style.display = 'block';
+			}
+
+			element.style.visibility = 'visible';
+			element.style.opacity    = 1;
 		},
 
 		/**
-		 * Hides the given element (changes opacity and display attributes)
+		 * Hides the given element(s) (changes opacity and display attributes)
 		 *
-		 * @param el  An element object
+		 * @param element  An element object or nodeList of elements or a CSS query string
 		 */
-		hide: function(el) {
-			el.style.opacity = 0;
-			el.style.display = 'none';
+		hide(element) {
+			if (!element) {
+				return;
+			}
+
+			if (typeof element === 'string') {
+				element = document.querySelectorAll(`${element}`);
+			}
+
+			if ('forEach' in element) {
+				element.forEach(subElement => $.hide(subElement));
+				return;
+			}
+
+			const computedDisplay = $.getComputedStyle(element, 'display');
+
+			if (computedDisplay != 'none' && !('origDisplay' in element)) {
+				element.origDisplay = computedDisplay;
+			}
+
+			element.style.display    = 'none';
+			element.style.visibility = 'hidden';
+			element.style.opacity    = 0;
 		},
 
 		/**
-		 * Fades in the the given element
+		 * Finds the computed style of an element
 		 *
-		 * @param el An       element object
+		 * @param element     An element object (or id)
+		 * @param property    The style property that needs to be returned
+		 *
+		 * @returns mixed
+		 */
+		getComputedStyle(element, property) {
+			if (typeof element === 'string') {
+				element = document.querySelector(`${element}`);
+			}
+
+			return window.getComputedStyle(element).getPropertyValue(property);
+		},
+
+		/**
+		 * Finds the default computed style of an element by its type
+		 *
+		 * @param element     An element object (or id)
+		 * @param property    The style property that needs to be returned
+		 *
+		 * @returns mixed
+		 */
+		getDefaultComputedStyle(element, property) {
+			if (!element) {
+				return null;
+			}
+
+			if (typeof element === 'string') {
+				element = document.querySelector(`${element}`);
+			}
+
+			const defaultElement = document.createElement(element.nodeName);
+
+			document.body.append(defaultElement);
+			let propertyValue = window.getComputedStyle(defaultElement).getPropertyValue(property);
+			defaultElement.remove();
+
+			return propertyValue;
+		},
+
+		/**
+		 * Fades in the the given element(s)
+		 *
+		 * @param element     An element object or nodeList of elements or a CSS query string
 		 * @param duration    Optional duration of the effect in milliseconds
 		 * @param oncomplete  Optional callback function to execute when effect is completed
 		 */
-		fadeIn: function(el, duration = 250, oncomplete = '') {
-			el.setAttribute('data-fading', 'in');
+		fadeIn(element, duration = 250, oncomplete = '') {
+			if (!element) {
+				return;
+			}
 
-			const self = this;
+			if (typeof element === 'string') {
+				element = document.querySelectorAll(`${element}`);
+			}
+
+			if ('forEach' in element) {
+				element.forEach(subElement => $.fadeIn(subElement, duration, oncomplete));
+				return;
+			}
+
+			element.setAttribute('data-fading', 'in');
 
 			const wait        = 50; // amount of time between steps
 			const nr_of_steps = duration / wait;
 			const change      = 1 / nr_of_steps; // time to wait before next step
 
-			if (!el.style.opacity || el.style.opacity == 1) {
-				el.style.opacity = 0;
+			if (!element.style.opacity || element.style.opacity == 1) {
+				element.style.opacity = 0;
 			}
-			if (el.style.display == 'none') {
-				el.style.display = 'block';
+			if (element.style.display == 'none') {
+				element.style.display = 'block';
 			}
 
 			(function fade() {
-				if (el.getAttribute('data-fading') == 'out') {
+				if (element.getAttribute('data-fading') == 'out') {
 					return;
 				}
-				el.style.opacity = parseFloat(el.style.opacity) + change;
-				if (el.style.opacity >= 1) {
-					self.show(el);
-					el.setAttribute('data-fading', '');
+				element.style.opacity = parseFloat(element.style.opacity) + change;
+				if (element.style.opacity >= 1) {
+					$.show(element);
+					element.setAttribute('data-fading', '');
 					if (oncomplete) {
 						oncomplete.call();
 					}
@@ -172,33 +284,44 @@ if (typeof window.Regular === 'undefined'
 		},
 
 		/**
-		 * Fades out the the given element
+		 * Fades out the the given element(s)
 		 *
-		 * @param el          An element object
+		 * @param element     An element object or nodeList of elements or a CSS query string
 		 * @param duration    Optional duration of the effect in milliseconds
 		 * @param oncomplete  Optional callback function to execute when effect is completed
 		 */
-		fadeOut: function(el, duration = 250, oncomplete = '') {
-			el.setAttribute('data-fading', 'out');
+		fadeOut(element, duration = 250, oncomplete = '') {
+			if (!element) {
+				return;
+			}
 
-			const self = this;
+			if (typeof element === 'string') {
+				element = document.querySelectorAll(`${element}`);
+			}
+
+			if ('forEach' in element) {
+				element.forEach(subElement => $.fadeOut(subElement, duration, oncomplete));
+				return;
+			}
+
+			element.setAttribute('data-fading', 'out');
 
 			const wait        = 50; // amount of time between steps
 			const nr_of_steps = duration / wait;
 			const change      = 1 / nr_of_steps; // time to wait before next step
 
-			if (!el.style.opacity || el.style.opacity == 0) {
-				el.style.opacity = 1;
+			if (!element.style.opacity || element.style.opacity == 0) {
+				element.style.opacity = 1;
 			}
 
 			(function fade() {
-				if (el.getAttribute('data-fading') == 'in') {
+				if (element.getAttribute('data-fading') == 'in') {
 					return;
 				}
-				el.style.opacity = parseFloat(el.style.opacity) - change;
-				if (el.style.opacity <= 0) {
-					self.hide(el);
-					el.setAttribute('data-fading', '');
+				element.style.opacity = parseFloat(element.style.opacity) - change;
+				if (element.style.opacity <= 0) {
+					$.hide(element);
+					element.setAttribute('data-fading', '');
 					if (oncomplete) {
 						oncomplete.call();
 					}
@@ -215,7 +338,7 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 * @param func  Callback function to execute when document is ready
 		 */
-		onReady: function(func) {
+		onReady(func) {
 			/in/.test(document.readyState)
 				? setTimeout(`Regular.onReady(${func})`, 9)
 				: func();
@@ -228,7 +351,7 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 * @return element
 		 */
-		createElementFromHTML: function(html) {
+		createElementFromHTML(html) {
 			return document.createRange().createContextualFragment(html);
 		},
 
@@ -240,7 +363,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param success  Optional callback function to execute when the url loads successfully (status 200)
 		 * @param fail     Optional callback function to execute when the url fails to load
 		 */
-		loadUrl: function(url, data = '', success = '', fail = '') {
+		loadUrl(url, data = '', success = '', fail = '') {
 			const request = new XMLHttpRequest();
 
 			request.open("POST", url, true);
@@ -274,29 +397,34 @@ if (typeof window.Regular === 'undefined'
 		/**
 		 * Alias of Regular.hasClass
 		 */
-		hasClass: function(el, classes, matchAll = false) {
-			return this.hasClasses(el, classes, matchAll);
+		hasClass(element, classes, matchAll = false) {
+			return $.hasClasses(element, classes, matchAll);
 		},
 
 		/**
 		 * Alias of Regular.addClasses
 		 */
-		addClass: function(el, classes) {
-			this.addClasses(el, classes);
+		addClass(element, classes) {
+			$.addClasses(element, classes);
 		},
 
 		/**
 		 * Alias of Regular.removeClasses
 		 */
-		removeClass: function(el, classes) {
-			this.removeClasses(el, classes);
+		removeClass(element, classes) {
+			$.removeClasses(element, classes);
 		},
 
 		/**
 		 * Alias of Regular.toggleClasses
 		 */
-		toggleClass: function(el, classes) {
-			this.toggleClasses(el, classes);
+		toggleClass(element, classes) {
+			$.toggleClasses(element, classes);
 		},
 	};
+
+	/**
+	 * @param  $  internal shorthand for the 'this' keyword
+	 */
+	const $ = window.Regular;
 }
