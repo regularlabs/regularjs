@@ -22,19 +22,19 @@ This library contains a number of simply static javascript functions.
 
 ## hasClasses
 
-Returns a boolean based on whether the element contains one or more of the given class names
+Returns a boolean based on whether the element contains one or more of the given class names.
 
 #### Syntax
 
 ```javascript
-elementHasClass = Regular.hasClasses(selector, classes, true)
+Regular.hasClasses(selector, classes, true)
 ```
 
-| Parameter  | Description                                                                        | Default |
-| ---------- | ---------------------------------------------------------------------------------- | :-----: |
-| `selector` | A CSS selector string or a HTMLElement object                                      |         |
-| `classes`  | A string or array of class names                                                   |         |
-| `matchAll` | Optional boolean whether the element should have all given classes (true) or at least one (false) | `true` |
+| Parameter  | Description                                                                         | Default |
+| ---------- | ----------------------------------------------------------------------------------- | :-----: |
+| `selector` | A CSS selector string or a HTMLElement object.                                      |         |
+| `classes`  | A string or array of class names.                                                   |         |
+| `matchAll` | Optional boolean whether the element should have all given classes (true) or at least one (false). | `true` |
 
 #### Examples
 
@@ -64,7 +64,7 @@ Regular.hasClasses(div, ['bar', 'baz'], false);
 
 ## addClasses
 
-Adds given class name(s) to the element
+Adds given class name(s) to the element.
 
 #### Syntax
 
@@ -72,10 +72,10 @@ Adds given class name(s) to the element
 Regular.addClasses(selector, classes)
 ```
 
-| Parameter  | Description                                                                        |
-| ---------- | ---------------------------------------------------------------------------------- |
-| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
-| `classes`  | A string or array of class names                                                   |
+| Parameter  | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
+| `classes`  | A string or array of class names.                                                   |
 
 #### Examples
 
@@ -101,7 +101,7 @@ Regular.addClasses(div, ['bar', 'baz']);
 
 ## removeClasses
 
-Removes given class name(s) from the element
+Removes given class name(s) from the element.
 
 #### Syntax
 
@@ -109,10 +109,10 @@ Removes given class name(s) from the element
 Regular.removeClasses(selector, classes)
 ```
 
-| Parameter  | Description                                                                        |
-| ---------- | ---------------------------------------------------------------------------------- |
-| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
-| `classes`  | A string or array of class names                                                   |
+| Parameter  | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
+| `classes`  | A string or array of class names.                                                   |
 
 #### Examples
 
@@ -138,7 +138,7 @@ Regular.removeClasses(div, 'qux');
 
 ## toggleClasses
 
-Toggles given class name(s) of the element
+Toggles given class name(s) of the element.
 
 #### Syntax
 
@@ -146,10 +146,10 @@ Toggles given class name(s) of the element
 Regular.toggleClasses(selector, classes)
 ```
 
-| Parameter  | Description                                                                        |
-| ---------- | ---------------------------------------------------------------------------------- |
-| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
-| `classes`  | A string or array of class names                                                   |
+| Parameter  | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
+| `classes`  | A string or array of class names.                                                   |
 
 #### Examples
 
@@ -175,7 +175,7 @@ Regular.toggleClasses(div, 'qux');
 
 ## show
 
-Shows the given element (changes opacity and display attributes)
+Shows the given element (changes opacity and display attributes).
 
 #### Syntax
 
@@ -183,9 +183,9 @@ Shows the given element (changes opacity and display attributes)
 Regular.show(el)
 ```
 
-| Parameter  | Description                                                                        |
-| ---------- | ---------------------------------------------------------------------------------- |
-| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| Parameter  | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
 
 #### Examples
 
@@ -203,7 +203,7 @@ Regular.show(div);
 
 ## hide
 
-Hides the given element (changes opacity and display attributes)
+Hides the given element (changes opacity and display attributes).
 
 #### Syntax
 
@@ -211,9 +211,9 @@ Hides the given element (changes opacity and display attributes)
 Regular.hide(el)
 ```
 
-| Parameter  | Description                                                                        |
-| ---------- | ---------------------------------------------------------------------------------- |
-| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| Parameter  | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
 
 #### Examples
 
@@ -231,7 +231,7 @@ Regular.hide('#mydiv');
 
 ## fadeIn
 
-Fades in the the given element
+Fades in the the given element.
 
 #### Syntax
 
@@ -239,11 +239,11 @@ Fades in the the given element
 Regular.fadeIn(selector, duration, oncomplete)
 ```
 
-| Parameter    | Description                                                                        | Default |
-| ------------ | ---------------------------------------------------------------------------------- | :-----: |
-| `selector`   | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
-| `duration`   | Optional duration of the effect in milliseconds                                    | `250`   |
-| `oncomplete` | Optional callback function to execute when effect is completed                     |         |
+| Parameter    | Description                                                                         | Default |
+| ------------ | ----------------------------------------------------------------------------------- | :-----: |
+| `selector`   | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |         |
+| `duration`   | Optional duration of the effect in milliseconds.                                    | `250`   |
+| `oncomplete` | Optional callback function to execute when effect is completed.                     |         |
 
 #### Examples
 
@@ -261,7 +261,7 @@ Regular.fadeIn(div, 1000, () => console.log('Faded in'));
 
 ## fadeOut
 
-Fades out the the given element
+Fades out the the given element.
 
 #### Syntax
 
@@ -269,11 +269,11 @@ Fades out the the given element
 Regular.fadeOut(selector, duration, oncomplete)
 ```
 
-| Parameter    | Description                                                                        | Default |
-| ------------ | ---------------------------------------------------------------------------------- | :-----: |
-| `selector`   | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
-| `duration`   | Optional duration of the effect in milliseconds                                    | `250`   |
-| `oncomplete` | Optional callback function to execute when effect is completed                     |         |
+| Parameter    | Description                                                                         | Default |
+| ------------ | ----------------------------------------------------------------------------------- | :-----: |
+| `selector`   | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |         |
+| `duration`   | Optional duration of the effect in milliseconds.                                    | `250`   |
+| `oncomplete` | Optional callback function to execute when effect is completed.                     |         |
 
 #### Examples
 
@@ -291,7 +291,7 @@ Regular.fadeOut(div, 1000, () => console.log('Faded out'));
 
 ## createElementFromHTML
 
-Converts a string with HTML code to 'DOM' elements
+Converts a string with HTML code to 'DOM' elements.
 
 #### Syntax
 
@@ -299,9 +299,9 @@ Converts a string with HTML code to 'DOM' elements
 Regular.createElementFromHTML(html)
 ```
 
-| Parameter    | Description           |
-| ------------ | --------------------- |
-| `html`       | String with HTML code |
+| Parameter    | Description            |
+| ------------ | ---------------------- |
+| `html`       | String with HTML code. |
 
 #### Example
 
@@ -313,7 +313,7 @@ const mydiv = Regular.createElementFromHTML(`<div id="mydiv" class="foo">My <str
 
 ## onReady
 
-Runs a function when the document is loaded (on ready state)
+Runs a function when the document is loaded (on ready state).
 
 #### Syntax
 
@@ -321,9 +321,9 @@ Runs a function when the document is loaded (on ready state)
 Regular.onReady(func)
 ```
 
-| Parameter    | Description                                         |
-| ------------ | --------------------------------------------------- |
-| `func`       | Callback function to execute when document is ready |
+| Parameter    | Description                                          |
+| ------------ | ---------------------------------------------------- |
+| `func`       | Callback function to execute when document is ready. |
 
 #### Example
 
@@ -335,7 +335,7 @@ Regular.onReady(`console.log('Document is ready!')`);
 
 ## loadUrl
 
-Converts a string with HTML code to 'DOM' elements
+Converts a string with HTML code to 'DOM' elements.
 
 #### Syntax
 
@@ -343,12 +343,12 @@ Converts a string with HTML code to 'DOM' elements
 Regular.loadUrl(url, data, success, fail)
 ```
 
-| Parameter | Description                                                                         |
-| --------- | ----------------------------------------------------------------------------------- |
-| `url`     | String containing the url to load                                                   |
-| `data`    | Optional string representing the POST data to send along                            |
-| `success` | Optional callback function to execute when the url loads successfully (status 200)  |
-| `fail`    | Optional callback function to execute when the url fails to load                    |
+| Parameter | Description                                                                          |
+| --------- | ------------------------------------------------------------------------------------ |
+| `url`     | String containing the url to load.                                                   |
+| `data`    | Optional string representing the POST data to send along.                            |
+| `success` | Optional callback function to execute when the url loads successfully (status 200).  |
+| `fail`    | Optional callback function to execute when the url fails to load.                    |
 
 The result (responseText), status and the full XMLHttpRequest object will be passed to the callback functions. 
 
@@ -366,6 +366,32 @@ Regular.loadUrl(
 	}, 
 	(result, status) => console.log(`Oh no! Failed with status: ${status}`)
 );
+```
+
+---
+
+## alias
+
+Sets a global alias for the Regular class.
+
+*Returns false if the given alias already exists as a global variable names.*
+
+#### Syntax
+
+```javascript
+Regular.alias(word)
+```
+
+| Parameter | Description                                                                |
+| --------- | -------------------------------------------------------------------------- |
+| `word`    | A string (character or word) representing the alias for the Regular class. |
+
+#### Example
+
+```javascript
+Regular.alias('$');
+
+$.addClass('#myDiv', 'foo');
 ```
 
 ---

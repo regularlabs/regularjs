@@ -30,11 +30,30 @@ if (typeof window.Regular === 'undefined'
 		 */
 
 		/**
-		 * Returns a boolean based on whether the element contains one or more of the given class names
+		 * Sets a global alias for the Regular class.
 		 *
-		 * @param selector  A CSS selector string or a HTMLElement object
-		 * @param classes   A string or array of class names
-		 * @param matchAll  Optional boolean whether the element should have all given classes (true) or at least one (false)
+		 * @param word  A string (character or word) representing the alias for the Regular class.
+		 *
+		 * @return boolean
+		 */
+		this.alias = function(word) {
+			if (typeof window[word] !== 'undefined') {
+				console.error(`Cannot set '${word}' as am alias of Regular, as it already exists.`);
+
+				return false;
+			}
+
+			window[word] = this;
+
+			return true;
+		};
+
+		/**
+		 * Returns a boolean based on whether the element contains one or more of the given class names.
+		 *
+		 * @param selector  A CSS selector string or a HTMLElement object.
+		 * @param classes   A string or array of class names.
+		 * @param matchAll  Optional boolean whether the element should have all given classes (true) or at least one (false).
 		 *
 		 * @return boolean
 		 */
@@ -69,41 +88,39 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Adds given class name(s) to the element(s)
+		 * Adds given class name(s) to the element(s).
 		 *
-		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
-		 * @param classes   A string or array of class names
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param classes   A string or array of class names.
 		 */
 		this.addClasses = function(selector, classes) {
 			doClasses('add', selector, classes);
 		};
 
 		/**
-		 * Removes given class name(s) from the element(s)
+		 * Removes given class name(s) from the element(s).
 		 *
-		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
-		 * @param classes   A string or array of class names
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param classes   A string or array of class names.
 		 */
 		this.removeClasses = function(selector, classes) {
 			doClasses('remove', selector, classes);
 		};
 
 		/**
-		 * Toggles given class name(s) of the element(s)
+		 * Toggles given class name(s) of the element(s).
 		 *
-		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
-		 * @param classes   A string or array of class names
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param classes   A string or array of class names.
 		 */
 		this.toggleClasses = function(selector, classes) {
 			doClasses('toggle', selector, classes);
 		};
 
 		/**
-		 * Shows the given element(s) (changes opacity and display attributes)
+		 * Shows the given element(s) (changes opacity and display attributes).
 		 *
-		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
-		 *
-		 * @return element
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 */
 		this.show = function(selector) {
 			if (!selector) {
@@ -141,9 +158,9 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Hides the given element(s) (changes opacity and display attributes)
+		 * Hides the given element(s) (changes opacity and display attributes).
 		 *
-		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 */
 		this.hide = function(selector) {
 			if (!selector) {
@@ -171,11 +188,11 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Fades in the the given element(s)
+		 * Fades in the the given element(s).
 		 *
-		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
-		 * @param duration    Optional duration of the effect in milliseconds
-		 * @param oncomplete  Optional callback function to execute when effect is completed
+		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param duration    Optional duration of the effect in milliseconds.
+		 * @param oncomplete  Optional callback function to execute when effect is completed.
 		 */
 		this.fadeIn = function(selector, duration = 250, oncomplete) {
 			if (!selector) {
@@ -224,11 +241,11 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Fades out the the given element(s)
+		 * Fades out the the given element(s).
 		 *
-		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
-		 * @param duration    Optional duration of the effect in milliseconds
-		 * @param oncomplete  Optional callback function to execute when effect is completed
+		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param duration    Optional duration of the effect in milliseconds.
+		 * @param oncomplete  Optional callback function to execute when effect is completed.
 		 */
 		this.fadeOut = function(selector, duration = 250, oncomplete) {
 			if (!selector()) {
@@ -274,9 +291,9 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Runs a function when the document is loaded (on ready state)
+		 * Runs a function when the document is loaded (on ready state).
 		 *
-		 * @param func  Callback function to execute when document is ready
+		 * @param func  Callback function to execute when document is ready.
 		 */
 		this.onReady = function(func) {
 			/in/.test(document.readyState)
@@ -287,9 +304,9 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Converts a string with HTML code to 'DOM' elements
+		 * Converts a string with HTML code to 'DOM' elements.
 		 *
-		 * @param html  String with HTML code
+		 * @param html  String with HTML code.
 		 *
 		 * @return element
 		 */
@@ -298,12 +315,12 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Loads a url with POST data and optionally calls a function hen ready
+		 * Loads a url with POST data and optionally calls a function hen ready.
 		 *
-		 * @param url      String containing the url to load
-		 * @param data     Optional string representing the POST data to send along
-		 * @param success  Optional callback function to execute when the url loads successfully (status 200)
-		 * @param fail     Optional callback function to execute when the url fails to load
+		 * @param url      String containing the url to load.
+		 * @param data     Optional string representing the POST data to send along.
+		 * @param success  Optional callback function to execute when the url loads successfully (status 200).
+		 * @param fail     Optional callback function to execute when the url fails to load.
 		 */
 		this.loadUrl = function(url, data, success, fail) {
 			const request = new XMLHttpRequest();
@@ -361,11 +378,11 @@ if (typeof window.Regular === 'undefined'
 		 */
 
 		/**
-		 * Executes an action on the element(s) to add/remove/toggle classes
+		 * Executes an action on the element(s) to add/remove/toggle classes.
 		 *
-		 * @param action    A string that identifies the action: add|remove|toggle
-		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects
-		 * @param classes   A string or array of class names
+		 * @param action    A string that identifies the action: add|remove|toggle.
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param classes   A string or array of class names.
 		 */
 		const doClasses = function(action, selector, classes) {
 			if (!selector) {
@@ -391,10 +408,10 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Finds the computed style of an element
+		 * Finds the computed style of an element.
 		 *
-		 * @param element   A HTMLElement object
-		 * @param property  The style property that needs to be returned
+		 * @param element   A HTMLElement object.
+		 * @param property  The style property that needs to be returned.
 		 *
 		 * @returns mixed
 		 */
@@ -407,10 +424,10 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Finds the default computed style of an element by its type
+		 * Finds the default computed style of an element by its type.
 		 *
-		 * @param element   A HTMLElement object
-		 * @param property  The style property that needs to be returned
+		 * @param element   A HTMLElement object.
+		 * @param property  The style property that needs to be returned.
 		 *
 		 * @returns mixed
 		 */
@@ -435,7 +452,7 @@ if (typeof window.Regular === 'undefined'
 		 */
 
 		/**
-		 * @param  $  internal shorthand for the 'this' keyword
+		 * @param  $  internal shorthand for the 'this' keyword.
 		 */
 		const $ = this;
 	};
