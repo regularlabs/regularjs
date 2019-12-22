@@ -19,6 +19,7 @@ This library contains a number of simply static javascript functions.
 [Aliases](#aliases)
 
 
+<br><br>
 ## hasClasses
 
 Returns a boolean based on whether the element contains one or more of the given class names
@@ -60,6 +61,7 @@ Regular.hasClasses(div, ['bar', 'baz'], false);
 ```
 
 
+<br><br>
 ## addClasses
 
 Adds given class name(s) to the element
@@ -97,6 +99,7 @@ Regular.addClasses(div, ['bar', 'baz']);
 ```
 
 
+<br><br>
 ## removeClasses
 
 Removes given class name(s) from the element
@@ -134,6 +137,7 @@ Regular.removeClasses(div, 'qux');
 ```
 
 
+<br><br>
 ## toggleClasses
 
 Toggles given class name(s) of the element
@@ -171,6 +175,7 @@ Regular.toggleClasses(div, 'qux');
 ```
 
 
+<br><br>
 ## show
 
 Shows the given element (changes opacity and display attributes)
@@ -197,6 +202,7 @@ Regular.show(div);
 ```
 
 
+<br><br>
 ## hide
 
 Hides the given element (changes opacity and display attributes)
@@ -223,6 +229,7 @@ Regular.hide(div);
 ```
 
 
+<br><br>
 ## fadeIn
 
 Fades in the the given element
@@ -253,6 +260,7 @@ Regular.fadeIn(div, 1000, () => console.log('Faded in'));
 ```
 
 
+<br><br>
 ## fadeOut
 
 Fades out the the given element
@@ -283,6 +291,7 @@ Regular.fadeOut(div, 1000, () => console.log('Faded out'));
 ```
 
 
+<br><br>
 ## createElementFromHTML
 
 Converts a string with HTML code to 'DOM' elements
@@ -304,6 +313,7 @@ const mydiv = Regular.createElementFromHTML(`<div id="mydiv" class="foo">My <str
 ```
 
 
+<br><br>
 ## onReady
 
 Runs a function when the document is loaded (on ready state)
@@ -325,6 +335,7 @@ Regular.onReady(`console.log('Document is ready!')`);
 ```
 
 
+<br><br>
 ## loadUrl
 
 Converts a string with HTML code to 'DOM' elements
@@ -361,6 +372,7 @@ Regular.loadUrl(
 ```
 
 
+<br><br>
 ## Aliases
 
 There are some aliases for some of the functions:
