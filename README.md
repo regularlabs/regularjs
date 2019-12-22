@@ -84,20 +84,16 @@ Regular.addClasses(el, classes)
 const div = document.querySelector('#mydiv');
 
 Regular.addClasses(div, 'bar');
-div.className;
-// => "foo bar"
+// => class="foo bar"
 
 Regular.addClasses(div, 'foo');
-div.className;
-// => "foo"
+// => class="foo"
 
 Regular.addClasses(div, 'bar baz');
-div.className;
-// => "foo bar baz"
+// => class="foo bar baz"
 
 Regular.addClasses(div, ['bar', 'baz']);
-div.className;
-// => "foo bar baz"
+// => class="foo bar baz"
 ```
 
 
@@ -125,20 +121,16 @@ Regular.removeClasses(el, classes)
 const div = document.querySelector('#mydiv');
 
 Regular.removeClasses(div, 'bar');
-div.className;
-// => "foo baz"
+// => class="foo baz"
 
 Regular.removeClasses(div, 'bar baz');
-div.className;
-// => "foo"
+// => class="foo"
 
 Regular.removeClasses(div, ['bar', 'baz']);
-div.className;
-// => "foo"
+// => class="foo"
 
 Regular.removeClasses(div, 'qux');
-div.className;
-// => "foo bar baz"
+// => class="foo bar baz"
 ```
 
 
@@ -166,20 +158,16 @@ Regular.toggleClasses(el, classes)
 const div = document.querySelector('#mydiv');
 
 Regular.toggleClasses(div, 'bar');
-div.className;
-// => "foo baz"
+// => class="foo baz"
 
 Regular.toggleClasses(div, 'bar baz');
-div.className;
-// => "foo"
+// => class="foo"
 
 Regular.toggleClasses(div, ['bar', 'qux']);
-div.className;
-// => "foo baz qux"
+// => class="foo baz qux"
 
 Regular.toggleClasses(div, 'qux');
-div.className;
-// => "foo bar baz qux"
+// => class="foo bar baz qux"
 ```
 
 
