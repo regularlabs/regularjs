@@ -15,8 +15,9 @@ This library contains a number of simply static javascript functions.
 [createElementFromHTML](#createelementfromhtml)<br>
 [onReady](#onready)<br>
 [loadUrl](#loadurl)<br>
+[alias](#alias)<br>
 <br>
-[Aliases](#aliases)
+[Function Aliases](#functionaliases)
 
 ---
 
@@ -396,7 +397,7 @@ $.addClass('#myDiv', 'foo');
 
 ---
 
-## Aliases
+## Function Aliases
 
 There are some aliases for some of the functions:
 
