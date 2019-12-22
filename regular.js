@@ -237,7 +237,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param duration    Optional duration of the effect in milliseconds
 		 * @param oncomplete  Optional callback function to execute when effect is completed
 		 */
-		fadeIn(element, duration = 250, oncomplete = '') {
+		fadeIn(element, duration = 250, oncomplete) {
 			if (!element) {
 				return;
 			}
@@ -273,7 +273,7 @@ if (typeof window.Regular === 'undefined'
 					$.show(element);
 					element.setAttribute('data-fading', '');
 					if (oncomplete) {
-						oncomplete.call();
+						oncomplete.call(element);
 					}
 					return;
 				}
@@ -290,7 +290,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param duration    Optional duration of the effect in milliseconds
 		 * @param oncomplete  Optional callback function to execute when effect is completed
 		 */
-		fadeOut(element, duration = 250, oncomplete = '') {
+		fadeOut(element, duration = 250, oncomplete) {
 			if (!element) {
 				return;
 			}
@@ -323,7 +323,7 @@ if (typeof window.Regular === 'undefined'
 					$.hide(element);
 					element.setAttribute('data-fading', '');
 					if (oncomplete) {
-						oncomplete.call();
+						oncomplete.call(element);
 					}
 					return;
 				}
@@ -363,7 +363,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param success  Optional callback function to execute when the url loads successfully (status 200)
 		 * @param fail     Optional callback function to execute when the url fails to load
 		 */
-		loadUrl(url, data = '', success = '', fail = '') {
+		loadUrl(url, data, success, fail) {
 			const request = new XMLHttpRequest();
 
 			request.open("POST", url, true);
@@ -375,20 +375,12 @@ if (typeof window.Regular === 'undefined'
 					return;
 				}
 
-				// data and result can be used in the callback functions to reference the response
-				let data   = this.responseText;
-				let result = this.responseText;
-
 				if (this.status == 200) {
-					if (success) {
-						eval(`${success};`);
-					}
+					success && success.call(null, this.responseText, this.status, this);
 					return;
 				}
 
-				if (fail) {
-					eval(`${fail};`);
-				}
+				fail && fail.call(null, this.responseText, this.status, this);
 			};
 
 			request.send(data);

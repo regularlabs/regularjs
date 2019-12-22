@@ -25,7 +25,7 @@ Returns a boolean based on whether the element contains one or more of the given
 
 #### Syntax
 
-```
+```javascript
 elementHasClass = Regular.hasClasses(el, classes, true)
 ```
 
@@ -37,26 +37,26 @@ elementHasClass = Regular.hasClasses(el, classes, true)
 
 #### Examples
 
-```
+```html
 <div id="mydiv" class="foo bar">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.hasClasses(div, 'foo');
-< true
+Regular.hasClasses(div, 'foo');
+// => true
 
-> Regular.hasClasses(div, 'baz');
-< false
+Regular.hasClasses(div, 'baz');
+// => false
 
-> Regular.hasClasses(div, 'bar baz');
-< false
+Regular.hasClasses(div, 'bar baz');
+// => false
 
-> Regular.hasClasses(div, ['bar', 'baz']);
-< false
+Regular.hasClasses(div, ['bar', 'baz']);
+// => false
 
-> Regular.hasClasses(div, ['bar', 'baz'], false);
-< true
+Regular.hasClasses(div, ['bar', 'baz'], false);
+// => true
 ```
 
 
@@ -66,7 +66,7 @@ Adds given class name(s) to the element
 
 #### Syntax
 
-```
+```javascript
 Regular.addClasses(el, classes)
 ```
 
@@ -77,27 +77,27 @@ Regular.addClasses(el, classes)
 
 #### Examples
 
-```
+```html
 <div id="mydiv" class="foo">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.addClasses(div, 'bar');
-> div.className;
-< "foo bar"
+Regular.addClasses(div, 'bar');
+div.className;
+// => "foo bar"
 
-> Regular.addClasses(div, 'foo');
-> div.className;
-< "foo"
+Regular.addClasses(div, 'foo');
+div.className;
+// => "foo"
 
-> Regular.addClasses(div, 'bar baz');
-> div.className;
-< "foo bar baz"
+Regular.addClasses(div, 'bar baz');
+div.className;
+// => "foo bar baz"
 
-> Regular.addClasses(div, ['bar', 'baz']);
-> div.className;
-< "foo bar baz"
+Regular.addClasses(div, ['bar', 'baz']);
+div.className;
+// => "foo bar baz"
 ```
 
 
@@ -107,7 +107,7 @@ Removes given class name(s) from the element
 
 #### Syntax
 
-```
+```javascript
 Regular.removeClasses(el, classes)
 ```
 
@@ -118,27 +118,27 @@ Regular.removeClasses(el, classes)
 
 #### Examples
 
-```
+```html
 <div id="mydiv" class="foo bar baz">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.removeClasses(div, 'bar');
-> div.className;
-< "foo baz"
+Regular.removeClasses(div, 'bar');
+div.className;
+// => "foo baz"
 
-> Regular.removeClasses(div, 'bar baz');
-> div.className;
-< "foo"
+Regular.removeClasses(div, 'bar baz');
+div.className;
+// => "foo"
 
-> Regular.removeClasses(div, ['bar', 'baz']);
-> div.className;
-< "foo"
+Regular.removeClasses(div, ['bar', 'baz']);
+div.className;
+// => "foo"
 
-> Regular.removeClasses(div, 'qux');
-> div.className;
-< "foo bar baz"
+Regular.removeClasses(div, 'qux');
+div.className;
+// => "foo bar baz"
 ```
 
 
@@ -148,7 +148,7 @@ Toggles given class name(s) of the element
 
 #### Syntax
 
-```
+```javascript
 Regular.toggleClasses(el, classes)
 ```
 
@@ -159,27 +159,27 @@ Regular.toggleClasses(el, classes)
 
 #### Examples
 
-```
+```html
 <div id="mydiv" class="foo bar baz">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.toggleClasses(div, 'bar');
-> div.className;
-< "foo baz"
+Regular.toggleClasses(div, 'bar');
+div.className;
+// => "foo baz"
 
-> Regular.toggleClasses(div, 'bar baz');
-> div.className;
-< "foo"
+Regular.toggleClasses(div, 'bar baz');
+div.className;
+// => "foo"
 
-> Regular.toggleClasses(div, ['bar', 'qux']);
-> div.className;
-< "foo baz qux"
+Regular.toggleClasses(div, ['bar', 'qux']);
+div.className;
+// => "foo baz qux"
 
-> Regular.toggleClasses(div, 'qux');
-> div.className;
-< "foo bar baz qux"
+Regular.toggleClasses(div, 'qux');
+div.className;
+// => "foo bar baz qux"
 ```
 
 
@@ -189,7 +189,7 @@ Shows the given element (changes opacity and display attributes)
 
 #### Syntax
 
-```
+```javascript
 Regular.show(el)
 ```
 
@@ -199,13 +199,13 @@ Regular.show(el)
 
 #### Examples
 
-```
+```html
 <div id="mydiv" style="display:none;">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.show(div);
+Regular.show(div);
 ```
 
 
@@ -215,7 +215,7 @@ Hides the given element (changes opacity and display attributes)
 
 #### Syntax
 
-```
+```javascript
 Regular.hide(el)
 ```
 
@@ -225,13 +225,13 @@ Regular.hide(el)
 
 #### Examples
 
-```
+```html
 <div id="mydiv">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.hide(div);
+Regular.hide(div);
 ```
 
 
@@ -241,27 +241,27 @@ Fades in the the given element
 
 #### Syntax
 
-```
+```javascript
 Regular.fadeIn(el, duration, oncomplete)
 ```
 
 | Parameter    | Description                                                     | Default |
 | ------------ | --------------------------------------------------------------- | :-----: |
 | `el`         | An element object                                               |         |
-| `duration`   | Optional duration of the effect in miliseconds                  | `250`   |
-| `oncomplete` | Optional callback function to execute when effect is completed  | `""`    |
+| `duration`   | Optional duration of the effect in milliseconds                  | `250`   |
+| `oncomplete` | Optional callback function to execute when effect is completed  |         |
 
 #### Examples
 
-```
+```html
 <div id="mydiv" style="display:none;">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.fadeIn(div);
+Regular.fadeIn(div);
 
-> Regular.fadeIn(div, 1000, `console.log('Faded in')`);
+Regular.fadeIn(div, 1000, `console.log('Faded in')`);
 ```
 
 
@@ -271,27 +271,27 @@ Fades out the the given element
 
 #### Syntax
 
-```
+```javascript
 Regular.fadeOut(el, duration, oncomplete)
 ```
 
 | Parameter    | Description                                                     | Default |
 | ------------ | --------------------------------------------------------------- | :-----: |
 | `el`         | An element object                                               |         |
-| `duration`   | Optional duration of the effect in miliseconds                  | `250`   |
-| `oncomplete` | Optional callback function to execute when effect is completed  | `""`    |
+| `duration`   | Optional duration of the effect in milliseconds                  | `250`   |
+| `oncomplete` | Optional callback function to execute when effect is completed  |         |
 
 #### Examples
 
-```
+```html
 <div id="mydiv">...</div>
 ```
-```
-> const div = document.querySelector('#mydiv');
+```javascript
+const div = document.querySelector('#mydiv');
 
-> Regular.fadeOut(div);
+Regular.fadeOut(div);
 
-> Regular.fadeOut(div, 1000, `console.log('Faded out')`);
+Regular.fadeOut(div, 1000, `console.log('Faded out')`);
 ```
 
 
@@ -301,7 +301,7 @@ Converts a string with HTML code to 'DOM' elements
 
 #### Syntax
 
-```
+```javascript
 Regular.createElementFromHTML(html)
 ```
 
@@ -311,8 +311,8 @@ Regular.createElementFromHTML(html)
 
 #### Example
 
-```
-> const mydiv = Regular.createElementFromHTML(`<div id="mydiv" class="foo">My <strong>cool</strong> element!</div>`);
+```javascript
+const mydiv = Regular.createElementFromHTML(`<div id="mydiv" class="foo">My <strong>cool</strong> element!</div>`);
 ```
 
 
@@ -322,7 +322,7 @@ Runs a function when the document is loaded (on ready state)
 
 #### Syntax
 
-```
+```javascript
 Regular.onReady(func)
 ```
 
@@ -333,7 +333,7 @@ Regular.onReady(func)
 #### Example
 
 ```
-> Regular.onReady(`console.log('Document is ready!')`);
+Regular.onReady(`console.log('Document is ready!')`);
 ```
 
 
@@ -343,23 +343,25 @@ Converts a string with HTML code to 'DOM' elements
 
 #### Syntax
 
-```
+```javascript
 Regular.loadUrl(url, data, success, fail)
 ```
 
-| Parameter | Description                                                                         | Default |
-| --------- | ----------------------------------------------------------------------------------- | :-----: |
-| `url`     | String containing the url to load                                                   |         |
-| `data`    | Optional string representing the POST data to send along                            | `""`    |
-| `success` | Optional callback function to execute when the url loads successfully (status 200)  | `""`    |
-| `fail`    | Optional callback function to execute when the url fails to load                    | `""`    |
+| Parameter | Description                                                                         |
+| --------- | ----------------------------------------------------------------------------------- |
+| `url`     | String containing the url to load                                                   |
+| `data`    | Optional string representing the POST data to send along                            |
+| `success` | Optional callback function to execute when the url loads successfully (status 200)  |
+| `fail`    | Optional callback function to execute when the url fails to load                    |
+
+The result (responseText), status and the full XMLHttpRequest object will be passed to the callback functions. 
 
 #### Example
 
-```
-> Regular.loadUrl('my/url.php');
+```javascript
+Regular.loadUrl('my/url.php');
 
-> Regular.loadUrl('my/url.php', 'id=123&format=ajax', `console.log('Yeah!')`, `console.log('Oh no!')`);
+Regular.loadUrl('my/url.php', 'id=123&format=ajax', `console.log('Yeah!')`, `console.log('Oh no!')`);
 ```
 
 
