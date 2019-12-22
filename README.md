@@ -248,7 +248,7 @@ Regular.fadeIn(el, duration, oncomplete)
 | Parameter    | Description                                                     | Default |
 | ------------ | --------------------------------------------------------------- | :-----: |
 | `el`         | An element object                                               |         |
-| `duration`   | Optional duration of the effect in milliseconds                  | `250`   |
+| `duration`   | Optional duration of the effect in milliseconds                 | `250`   |
 | `oncomplete` | Optional callback function to execute when effect is completed  |         |
 
 #### Examples
@@ -261,7 +261,7 @@ const div = document.querySelector('#mydiv');
 
 Regular.fadeIn(div);
 
-Regular.fadeIn(div, 1000, `console.log('Faded in')`);
+Regular.fadeIn(div, 1000, () => console.log('Faded in'));
 ```
 
 
@@ -278,7 +278,7 @@ Regular.fadeOut(el, duration, oncomplete)
 | Parameter    | Description                                                     | Default |
 | ------------ | --------------------------------------------------------------- | :-----: |
 | `el`         | An element object                                               |         |
-| `duration`   | Optional duration of the effect in milliseconds                  | `250`   |
+| `duration`   | Optional duration of the effect in milliseconds                 | `250`   |
 | `oncomplete` | Optional callback function to execute when effect is completed  |         |
 
 #### Examples
@@ -291,7 +291,7 @@ const div = document.querySelector('#mydiv');
 
 Regular.fadeOut(div);
 
-Regular.fadeOut(div, 1000, `console.log('Faded out')`);
+Regular.fadeOut(div, 1000, () => console.log('Faded out'));
 ```
 
 
@@ -361,7 +361,15 @@ The result (responseText), status and the full XMLHttpRequest object will be pas
 ```javascript
 Regular.loadUrl('my/url.php');
 
-Regular.loadUrl('my/url.php', 'id=123&format=ajax', `console.log('Yeah!')`, `console.log('Oh no!')`);
+Regular.loadUrl(
+	'my/url.php', 
+	'id=123&format=ajax', 
+	(result) => {
+		console.log('Yeah!'); 
+		console.log(result); 
+	}, 
+	(result, status) => console.log(`Oh no! Failed with status: ${status}`)
+);
 ```
 
 
