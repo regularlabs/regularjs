@@ -30,10 +30,10 @@ Returns a boolean based on whether the element contains one or more of the given
 elementHasClass = Regular.hasClasses(el, classes, true)
 ```
 
-| Parameter  | Description                      | Default |
-| ---------- | -------------------------------- | :-----: |
-| `el`       | An element object                |         |
-| `classes`  | A string or array of class names |         |
+| Parameter  | Description                                                                        | Default |
+| ---------- | ---------------------------------------------------------------------------------- | :-----: |
+| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
+| `classes`  | A string or array of class names                                                   |         |
 | `matchAll` | Optional boolean whether the element should have all given classes (true) or at least one (false) | `true` |
 
 #### Examples
@@ -42,20 +42,20 @@ elementHasClass = Regular.hasClasses(el, classes, true)
 <div id="mydiv" class="foo bar">...</div>
 ```
 ```javascript
-const div = document.querySelector('#mydiv');
 
-Regular.hasClasses(div, 'foo');
+Regular.hasClasses('#mydiv', 'foo');
 // => true
 
-Regular.hasClasses(div, 'baz');
+Regular.hasClasses('#mydiv', 'baz');
 // => false
 
-Regular.hasClasses(div, 'bar baz');
+Regular.hasClasses('#mydiv', 'bar baz');
 // => false
 
-Regular.hasClasses(div, ['bar', 'baz']);
+Regular.hasClasses('#mydiv', ['bar', 'baz']);
 // => false
 
+const div = document.querySelector('#mydiv');
 Regular.hasClasses(div, ['bar', 'baz'], false);
 // => true
 ```
@@ -72,10 +72,10 @@ Adds given class name(s) to the element
 Regular.addClasses(el, classes)
 ```
 
-| Parameter  | Description                      |
-| ---------- | -------------------------------- |
-| `el`       | An element object                |
-| `classes`  | A string or array of class names |
+| Parameter  | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `classes`  | A string or array of class names                                                   |
 
 #### Examples
 
@@ -83,17 +83,16 @@ Regular.addClasses(el, classes)
 <div id="mydiv" class="foo">...</div>
 ```
 ```javascript
-const div = document.querySelector('#mydiv');
-
-Regular.addClasses(div, 'bar');
+Regular.addClasses('#mydiv', 'bar');
 // => class="foo bar"
 
-Regular.addClasses(div, 'foo');
+Regular.addClasses('#mydiv', 'foo');
 // => class="foo"
 
-Regular.addClasses(div, 'bar baz');
+Regular.addClasses('#mydiv', 'bar baz');
 // => class="foo bar baz"
 
+const div = document.querySelector('#mydiv');
 Regular.addClasses(div, ['bar', 'baz']);
 // => class="foo bar baz"
 ```
@@ -110,10 +109,10 @@ Removes given class name(s) from the element
 Regular.removeClasses(el, classes)
 ```
 
-| Parameter  | Description                      |
-| ---------- | -------------------------------- |
-| `el`       | An element object                |
-| `classes`  | A string or array of class names |
+| Parameter  | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `classes`  | A string or array of class names                                                   |
 
 #### Examples
 
@@ -121,17 +120,16 @@ Regular.removeClasses(el, classes)
 <div id="mydiv" class="foo bar baz">...</div>
 ```
 ```javascript
-const div = document.querySelector('#mydiv');
-
-Regular.removeClasses(div, 'bar');
+Regular.removeClasses('#mydiv', 'bar');
 // => class="foo baz"
 
-Regular.removeClasses(div, 'bar baz');
+Regular.removeClasses('#mydiv', 'bar baz');
 // => class="foo"
 
-Regular.removeClasses(div, ['bar', 'baz']);
+Regular.removeClasses('#mydiv', ['bar', 'baz']);
 // => class="foo"
 
+const div = document.querySelector('#mydiv');
 Regular.removeClasses(div, 'qux');
 // => class="foo bar baz"
 ```
@@ -148,10 +146,10 @@ Toggles given class name(s) of the element
 Regular.toggleClasses(el, classes)
 ```
 
-| Parameter  | Description                      |
-| ---------- | -------------------------------- |
-| `el`       | An element object                |
-| `classes`  | A string or array of class names |
+| Parameter  | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
+| `classes`  | A string or array of class names                                                   |
 
 #### Examples
 
@@ -159,17 +157,16 @@ Regular.toggleClasses(el, classes)
 <div id="mydiv" class="foo bar baz">...</div>
 ```
 ```javascript
-const div = document.querySelector('#mydiv');
-
-Regular.toggleClasses(div, 'bar');
+Regular.toggleClasses('#mydiv', 'bar');
 // => class="foo baz"
 
-Regular.toggleClasses(div, 'bar baz');
+Regular.toggleClasses('#mydiv', 'bar baz');
 // => class="foo"
 
-Regular.toggleClasses(div, ['bar', 'qux']);
+Regular.toggleClasses('#mydiv', ['bar', 'qux']);
 // => class="foo baz qux"
 
+const div = document.querySelector('#mydiv');
 Regular.toggleClasses(div, 'qux');
 // => class="foo bar baz qux"
 ```
@@ -186,9 +183,9 @@ Shows the given element (changes opacity and display attributes)
 Regular.show(el)
 ```
 
-| Parameter  | Description               |
-| ---------- | ------------------------- |
-| `el`       | An element object         |
+| Parameter  | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
 
 #### Examples
 
@@ -196,8 +193,9 @@ Regular.show(el)
 <div id="mydiv" style="display:none;">...</div>
 ```
 ```javascript
-const div = document.querySelector('#mydiv');
+Regular.show('#mydiv');
 
+const div = document.querySelector('#mydiv');
 Regular.show(div);
 ```
 
@@ -213,9 +211,9 @@ Hides the given element (changes opacity and display attributes)
 Regular.hide(el)
 ```
 
-| Parameter  | Description               |
-| ---------- | ------------------------- |
-| `el`       | An element object         |
+| Parameter  | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `el`       | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |
 
 #### Examples
 
@@ -223,9 +221,10 @@ Regular.hide(el)
 <div id="mydiv">...</div>
 ```
 ```javascript
-const div = document.querySelector('#mydiv');
-
 Regular.hide(div);
+
+const div = document.querySelector('#mydiv');
+Regular.hide('#mydiv');
 ```
 
 
@@ -240,11 +239,11 @@ Fades in the the given element
 Regular.fadeIn(el, duration, oncomplete)
 ```
 
-| Parameter    | Description                                                     | Default |
-| ------------ | --------------------------------------------------------------- | :-----: |
-| `el`         | An element object                                               |         |
-| `duration`   | Optional duration of the effect in milliseconds                 | `250`   |
-| `oncomplete` | Optional callback function to execute when effect is completed  |         |
+| Parameter    | Description                                                                        | Default |
+| ------------ | ---------------------------------------------------------------------------------- | :-----: |
+| `el`         | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
+| `duration`   | Optional duration of the effect in milliseconds                                    | `250`   |
+| `oncomplete` | Optional callback function to execute when effect is completed                     |         |
 
 #### Examples
 
@@ -252,10 +251,9 @@ Regular.fadeIn(el, duration, oncomplete)
 <div id="mydiv" style="display:none;">...</div>
 ```
 ```javascript
+Regular.fadeIn('#mydiv');
+
 const div = document.querySelector('#mydiv');
-
-Regular.fadeIn(div);
-
 Regular.fadeIn(div, 1000, () => console.log('Faded in'));
 ```
 
@@ -271,11 +269,11 @@ Fades out the the given element
 Regular.fadeOut(el, duration, oncomplete)
 ```
 
-| Parameter    | Description                                                     | Default |
-| ------------ | --------------------------------------------------------------- | :-----: |
-| `el`         | An element object                                               |         |
-| `duration`   | Optional duration of the effect in milliseconds                 | `250`   |
-| `oncomplete` | Optional callback function to execute when effect is completed  |         |
+| Parameter    | Description                                                                        | Default |
+| ------------ | ---------------------------------------------------------------------------------- | :-----: |
+| `el`         | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects |         |
+| `duration`   | Optional duration of the effect in milliseconds                                    | `250`   |
+| `oncomplete` | Optional callback function to execute when effect is completed                     |         |
 
 #### Examples
 
@@ -283,10 +281,9 @@ Regular.fadeOut(el, duration, oncomplete)
 <div id="mydiv">...</div>
 ```
 ```javascript
+Regular.fadeOut('#mydiv');
+
 const div = document.querySelector('#mydiv');
-
-Regular.fadeOut(div);
-
 Regular.fadeOut(div, 1000, () => console.log('Faded out'));
 ```
 
