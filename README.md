@@ -23,7 +23,7 @@ This library contains a number of simple static javascript functions.
 [loadUrl](#loadurl)<br>
 [alias](#alias)<br>
 <br>
-[Function Aliases](#functionaliases)
+[Function Aliases](#function-aliases)
 
 ---
 
