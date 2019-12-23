@@ -2,7 +2,13 @@
 
 ### *A light and simple JavaScript Library*
 
-This library contains a number of simply static javascript functions.
+Very small: ~1.8 kB gzipped 😮
+
+Regular.js is released under the [MIT license](https://github.com/regularlabs/regularjs/blob/master/LICENCE).
+
+---
+
+This library contains a number of simple static javascript functions.
 
 [hasClasses](#hasclasses)<br>
 [addClasses](#addclasses)<br>

@@ -5,7 +5,7 @@
  * @author          Peter van Westen <info@regularlabs.com>
  * @link            https://github.com/regularlabs/regularjs
  * @copyright       Copyright © 2019 Regular Labs - All Rights Reserved
- * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * @license         https://github.com/regularlabs/regularjs/blob/master/LICENCE MIT
  */
 
 "use strict";
