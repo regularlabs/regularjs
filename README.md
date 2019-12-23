@@ -1,4 +1,4 @@
-![Regular.js](https://i.pickadummy.com/900x100?colorize=3333FF&contrast=-1&size=100&font=FFF+Tusj&cache=1&text=Regular.js)
+![Regular.js](https://i.pickadummy.com/900x100?colorize=3333FF&contrast=-1&size=100&font=FFF+Tusj&text=Regular.js)
 
 ### *A light and simple JavaScript Library*
 
