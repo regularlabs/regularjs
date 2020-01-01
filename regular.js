@@ -43,7 +43,7 @@ if (typeof window.Regular === 'undefined'
 				return false;
 			}
 
-			window[word] = this;
+			window[word] = $;
 
 			return true;
 		};
@@ -62,8 +62,8 @@ if (typeof window.Regular === 'undefined'
 				return false;
 			}
 
-			const element = typeof element === 'string'
-				? document.querySelectorAll(`${element}`)
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(`${selector}`)
 				: selector;
 
 			if (typeof classes === 'string') {
@@ -127,8 +127,8 @@ if (typeof window.Regular === 'undefined'
 				return;
 			}
 
-			const element = typeof element === 'string'
-				? document.querySelectorAll(`${element}`)
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(`${selector}`)
 				: selector;
 
 			if ('forEach' in element) {
@@ -167,8 +167,8 @@ if (typeof window.Regular === 'undefined'
 				return;
 			}
 
-			const element = typeof element === 'string'
-				? document.querySelectorAll(`${element}`)
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(`${selector}`)
 				: selector;
 
 			if ('forEach' in element) {
@@ -199,8 +199,8 @@ if (typeof window.Regular === 'undefined'
 				return;
 			}
 
-			const element = typeof element === 'string'
-				? document.querySelectorAll(`${element}`)
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(`${selector}`)
 				: selector;
 
 			if ('forEach' in element) {
@@ -252,8 +252,8 @@ if (typeof window.Regular === 'undefined'
 				return;
 			}
 
-			const element = typeof element === 'string'
-				? document.querySelectorAll(`${element}`)
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(`${selector}`)
 				: selector;
 
 			if ('forEach' in element) {
@@ -375,8 +375,8 @@ if (typeof window.Regular === 'undefined'
 				return;
 			}
 
-			const element = typeof element === 'string'
-				? document.querySelectorAll(`${element}`)
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(`${selector}`)
 				: selector;
 
 			if ('forEach' in element) {
@@ -388,9 +388,7 @@ if (typeof window.Regular === 'undefined'
 				classes = classes.split(' ');
 			}
 
-			for (const clss of classes) {
-				element.classList[action](clss);
-			}
+			element.classList[action](...clss);
 		};
 
 		/**
