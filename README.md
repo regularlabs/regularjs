@@ -2,9 +2,11 @@
 
 ### *A light and simple JavaScript Library*
 
-Very small: ~1.8 kB gzipped 😮
+[![GitHub license](https://img.shields.io/badge/license-MIT-3490DC)](https://github.com/regularlabs/regularjs/blob/master/LICENCE)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-F6993F.svg)](https://github.com/regularlabs/regularjs/pulls)
+[![coded with passion by Regular Labs](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-Regular%20Labs-E3342F.svg)](https://github.com/regularlabs)
 
-Regular.js is released under the [MIT license](https://github.com/regularlabs/regularjs/blob/master/LICENCE).
+Very small: ![~1.8 kB gzipped](https://img.shields.io/badge/gzipped-~1.8%20kB-38C172.svg) 😮
 
 ---
 
