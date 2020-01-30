@@ -63,7 +63,7 @@ if (typeof window.Regular === 'undefined'
 			}
 
 			const element = typeof selector === 'string'
-				? document.querySelectorAll(`${selector}`)
+				? document.querySelectorAll(selector)
 				: selector;
 
 			if (typeof classes === 'string') {
@@ -128,7 +128,7 @@ if (typeof window.Regular === 'undefined'
 			}
 
 			const element = typeof selector === 'string'
-				? document.querySelectorAll(`${selector}`)
+				? document.querySelectorAll(selector)
 				: selector;
 
 			if ('forEach' in element) {
@@ -168,7 +168,7 @@ if (typeof window.Regular === 'undefined'
 			}
 
 			const element = typeof selector === 'string'
-				? document.querySelectorAll(`${selector}`)
+				? document.querySelectorAll(selector)
 				: selector;
 
 			if ('forEach' in element) {
@@ -200,7 +200,7 @@ if (typeof window.Regular === 'undefined'
 			}
 
 			const element = typeof selector === 'string'
-				? document.querySelectorAll(`${selector}`)
+				? document.querySelectorAll(selector)
 				: selector;
 
 			if ('forEach' in element) {
@@ -253,7 +253,7 @@ if (typeof window.Regular === 'undefined'
 			}
 
 			const element = typeof selector === 'string'
-				? document.querySelectorAll(`${selector}`)
+				? document.querySelectorAll(selector)
 				: selector;
 
 			if ('forEach' in element) {
@@ -298,7 +298,7 @@ if (typeof window.Regular === 'undefined'
 		this.onReady = function(func) {
 			/in/.test(document.readyState)
 				? setTimeout(() => {
-					Regular.onReady(func)
+					Regular.onReady(func);
 				}, 9)
 				: func.call();
 		};
@@ -376,7 +376,7 @@ if (typeof window.Regular === 'undefined'
 			}
 
 			const element = typeof selector === 'string'
-				? document.querySelectorAll(`${selector}`)
+				? document.querySelectorAll(selector)
 				: selector;
 
 			if ('forEach' in element) {
