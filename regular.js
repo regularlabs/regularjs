@@ -388,7 +388,7 @@ if (typeof window.Regular === 'undefined'
 				classes = classes.split(' ');
 			}
 
-			element.classList[action](...clss);
+			element.classList[action](...classes);
 		};
 
 		/**
