@@ -38,7 +38,7 @@ if (typeof window.Regular === 'undefined'
 		 */
 		this.alias = function(word) {
 			if (typeof window[word] !== 'undefined') {
-				console.error(`Cannot set '${word}' as am alias of Regular, as it already exists.`);
+				console.error(`Cannot set '${word}' as an alias of Regular, as it already exists.`);
 
 				return false;
 			}
