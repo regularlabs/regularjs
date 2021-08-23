@@ -4,7 +4,7 @@
  *
  * @author          Peter van Westen <info@regularlabs.com>
  * @link            https://github.com/regularlabs/regularjs
- * @copyright       Copyright © 2019 Regular Labs - All Rights Reserved
+ * @copyright       Copyright © 2021 Regular Labs - All Rights Reserved
  * @license         https://github.com/regularlabs/regularjs/blob/master/LICENCE MIT
  */
 
@@ -12,7 +12,7 @@
 
 if (typeof window.Regular === 'undefined'
 	|| typeof Regular.version === 'undefined'
-	|| Regular.version < 1.2) {
+	|| Regular.version < 1.3) {
 
 	window.Regular = new function() {
 		/**
@@ -21,7 +21,7 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 */
 
-		this.version = 1.2;
+		this.version = 1.3;
 
 		/**
 		 *
@@ -58,13 +58,17 @@ if (typeof window.Regular === 'undefined'
 		 * @return boolean
 		 */
 		this.hasClasses = function(selector, classes, matchAll = true) {
-			if (!selector) {
+			if ( ! selector) {
 				return false;
 			}
 
 			const element = typeof selector === 'string'
-				? document.querySelectorAll(selector)
+				? document.querySelector(selector)
 				: selector;
+
+			if ( ! element) {
+				return false;
+			}
 
 			if (typeof classes === 'string') {
 				classes = classes.split(' ');
@@ -75,11 +79,11 @@ if (typeof window.Regular === 'undefined'
 			for (const clss of classes) {
 				hasClass = element.classList.contains(clss);
 
-				if (matchAll && !hasClass) {
+				if (matchAll && ! hasClass) {
 					return false;
 				}
 
-				if (!matchAll && hasClass) {
+				if ( ! matchAll && hasClass) {
 					return true;
 				}
 			}
@@ -123,7 +127,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 */
 		this.show = function(selector) {
-			if (!selector) {
+			if ( ! selector) {
 				return;
 			}
 
@@ -138,18 +142,18 @@ if (typeof window.Regular === 'undefined'
 
 			let computedDisplay = getComputedStyle(element, 'display');
 
-			if (!('origDisplay' in element)) {
-				element.origDisplay = computedDisplay == 'none'
+			if ( ! ('origDisplay' in element)) {
+				element.origDisplay = computedDisplay === 'none'
 					? getDefaultComputedStyle(element, 'display')
 					: computedDisplay;
 			}
 
-			if (computedDisplay == 'none') {
+			if (computedDisplay === 'none') {
 				element.style.display = ('origDisplay' in element) ? element.origDisplay : '';
 			}
 
 			computedDisplay = getComputedStyle(element, 'display');
-			if (computedDisplay == 'none') {
+			if (computedDisplay === 'none') {
 				element.style.display = 'block';
 			}
 
@@ -163,7 +167,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 */
 		this.hide = function(selector) {
-			if (!selector) {
+			if ( ! selector) {
 				return;
 			}
 
@@ -178,7 +182,7 @@ if (typeof window.Regular === 'undefined'
 
 			const computedDisplay = getComputedStyle(element, 'display');
 
-			if (computedDisplay != 'none' && !('origDisplay' in element)) {
+			if (computedDisplay !== 'none' && ! ('origDisplay' in element)) {
 				element.origDisplay = computedDisplay;
 			}
 
@@ -195,7 +199,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param oncomplete  Optional callback function to execute when effect is completed.
 		 */
 		this.fadeIn = function(selector, duration = 250, oncomplete) {
-			if (!selector) {
+			if ( ! selector) {
 				return;
 			}
 
@@ -203,41 +207,17 @@ if (typeof window.Regular === 'undefined'
 				? document.querySelectorAll(selector)
 				: selector;
 
-			if ('forEach' in element) {
-				element.forEach(subElement => $.fadeIn(subElement, duration, oncomplete));
-				return;
-			}
-
-			element.setAttribute('data-fading', 'in');
-
-			const wait        = 50; // amount of time between steps
-			const nr_of_steps = duration / wait;
-			const change      = 1 / nr_of_steps; // time to wait before next step
-
-			if (!element.style.opacity || element.style.opacity == 1) {
-				element.style.opacity = 0;
-			}
-			if (element.style.display == 'none') {
-				element.style.display = 'block';
-			}
-
-			(function fade() {
-				if (element.getAttribute('data-fading') == 'out') {
-					return;
-				}
-				element.style.opacity = parseFloat(element.style.opacity) + change;
-				if (element.style.opacity >= 1) {
+			$.fadeTo(
+				element,
+				1,
+				duration,
+				() => {
 					$.show(element);
-					element.setAttribute('data-fading', '');
 					if (oncomplete) {
 						oncomplete.call(element);
 					}
-					return;
 				}
-				setTimeout(function() {
-					fade.call();
-				}, wait);
-			})();
+			);
 		};
 
 		/**
@@ -248,7 +228,37 @@ if (typeof window.Regular === 'undefined'
 		 * @param oncomplete  Optional callback function to execute when effect is completed.
 		 */
 		this.fadeOut = function(selector, duration = 250, oncomplete) {
-			if (!selector) {
+			if ( ! selector) {
+				return;
+			}
+
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(selector)
+				: selector;
+
+			$.fadeTo(
+				element,
+				0,
+				duration,
+				() => {
+					$.hide(element);
+					if (oncomplete) {
+						oncomplete.call(element);
+					}
+				}
+			);
+		};
+
+		/**
+		 * Fades out the the given element(s).
+		 *
+		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param opacity     Opacity Value to fade to
+		 * @param duration    Optional duration of the effect in milliseconds.
+		 * @param oncomplete  Optional callback function to execute when effect is completed.
+		 */
+		this.fadeTo = function(selector, opacity, duration = 250, oncomplete) {
+			if ( ! selector) {
 				return;
 			}
 
@@ -257,34 +267,58 @@ if (typeof window.Regular === 'undefined'
 				: selector;
 
 			if ('forEach' in element) {
-				element.forEach(subElement => $.fadeOut(subElement, duration, oncomplete));
+				element.forEach(subElement => $.fadeTo(subElement, opacity, duration));
 				return;
 			}
-
-			element.setAttribute('data-fading', 'out');
 
 			const wait        = 50; // amount of time between steps
 			const nr_of_steps = duration / wait;
 			const change      = 1 / nr_of_steps; // time to wait before next step
 
-			if (!element.style.opacity || element.style.opacity == 0) {
-				element.style.opacity = 1;
+			element.style.opacity = getComputedStyle(element, 'opacity');
+
+			if (opacity === element.style.opacity) {
+				element.setAttribute('data-fading', '');
+
+				if (oncomplete) {
+					oncomplete.call(element);
+				}
+
+				return;
 			}
 
+			const direction = opacity > element.style.opacity ? 'in' : 'out';
+
+			element.setAttribute('data-fading', direction);
+
 			(function fade() {
-				if (element.getAttribute('data-fading') == 'in') {
+				if (element.getAttribute('data-fading')
+					&& element.getAttribute('data-fading') !== direction
+				) {
 					return;
 				}
-				element.style.opacity = parseFloat(element.style.opacity) - change;
-				if (element.style.opacity <= 0) {
-					$.hide(element);
+
+				const new_opacity = direction === 'out'
+					? parseFloat(element.style.opacity) - change
+					: parseFloat(element.style.opacity) + change;
+
+				if ((direction === 'in' && new_opacity >= opacity)
+					|| (direction === 'out' && new_opacity <= opacity)
+				) {
+					element.style.opacity = opacity;
+
 					element.setAttribute('data-fading', '');
+
 					if (oncomplete) {
 						oncomplete.call(element);
 					}
+
 					return;
 				}
-				setTimeout(function() {
+
+				element.style.opacity = new_opacity;
+
+				setTimeout(() => {
 					fade.call();
 				}, wait);
 			})();
@@ -296,11 +330,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param func  Callback function to execute when document is ready.
 		 */
 		this.onReady = function(func) {
-			/in/.test(document.readyState)
-				? setTimeout(() => {
-					Regular.onReady(func);
-				}, 9)
-				: func.call();
+			document.addEventListener('DOMContentLoaded', func);
 		};
 
 		/**
@@ -330,11 +360,11 @@ if (typeof window.Regular === 'undefined'
 			request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
 			request.onreadystatechange = function() {
-				if (this.readyState != 4) {
+				if (this.readyState !== 4) {
 					return;
 				}
 
-				if (this.status == 200) {
+				if (this.status === 200) {
 					success && success.call(null, this.responseText, this.status, this);
 					return;
 				}
@@ -351,7 +381,7 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 */
 
-		this.as = this.alias;
+		this.as          = this.alias;
 		this.hasClass    = this.hasClasses;
 		this.addClass    = this.addClasses;
 		this.removeClass = this.removeClasses;
@@ -371,7 +401,7 @@ if (typeof window.Regular === 'undefined'
 		 * @param classes   A string or array of class names.
 		 */
 		const doClasses = function(action, selector, classes) {
-			if (!selector) {
+			if ( ! selector) {
 				return;
 			}
 
@@ -400,7 +430,7 @@ if (typeof window.Regular === 'undefined'
 		 * @returns mixed
 		 */
 		const getComputedStyle = function(element, property) {
-			if (!element) {
+			if ( ! element) {
 				return null;
 			}
 
@@ -416,7 +446,7 @@ if (typeof window.Regular === 'undefined'
 		 * @returns mixed
 		 */
 		const getDefaultComputedStyle = function(element, property) {
-			if (!element) {
+			if ( ! element) {
 				return null;
 			}
 

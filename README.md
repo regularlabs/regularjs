@@ -6,7 +6,7 @@
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-F6993F.svg)](https://github.com/regularlabs/regularjs/pulls)
 [![coded with passion by Regular Labs](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-Regular%20Labs-E3342F.svg)](https://github.com/regularlabs)
 
-Very small: ![~1.8 kB gzipped](https://img.shields.io/badge/gzipped-~1.8%20kB-38C172.svg) 😮
+Very small: ![~1.5 kB gzipped](https://img.shields.io/badge/gzipped-~1.5%20kB-38C172.svg) 😮
 
 ---
 
@@ -20,6 +20,7 @@ This library contains a number of simple static javascript functions.
 [hide](#hide)<br>
 [fadeIn](#fadein)<br>
 [fadeOut](#fadeout)<br>
+[fadeTo](#fadeto)<br>
 [createElementFromHTML](#createelementfromhtml)<br>
 [onReady](#onready)<br>
 [loadUrl](#loadurl)<br>
@@ -297,6 +298,37 @@ Regular.fadeOut('#mydiv');
 
 const div = document.querySelector('#mydiv');
 Regular.fadeOut(div, 1000, () => console.log('Faded out'));
+```
+
+---
+
+## fadeTo
+
+Fades out the the given element.
+
+#### Syntax
+
+```javascript
+Regular.fadeTo(selector, opacity, duration, oncomplete)
+```
+
+| Parameter    | Description                                                                         | Default |
+| ------------ | ----------------------------------------------------------------------------------- | :-----: |
+| `selector`   | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |         |
+| `opacity`    | The opacity to fade to (number between 0 and 1).                                    |         |
+| `duration`   | Optional duration of the effect in milliseconds.                                    | `250`   |
+| `oncomplete` | Optional callback function to execute when effect is completed.                     |         |
+
+#### Examples
+
+```html
+<div id="mydiv">...</div>
+```
+```javascript
+Regular.fadeTo('#mydiv', 0.5);
+
+const div = document.querySelector('#mydiv');
+Regular.fadeTo(div, 0.2, 1000, () => console.log('Finished fading'));
 ```
 
 ---
