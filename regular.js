@@ -12,7 +12,7 @@
 
 if (typeof window.Regular === 'undefined'
 	|| typeof Regular.version === 'undefined'
-	|| Regular.version < 1.3) {
+	|| Regular.version < 1.4) {
 
 	window.Regular = new function() {
 		/**
@@ -21,7 +21,7 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 */
 
-		this.version = 1.3;
+		this.version = 1.4;
 
 		/**
 		 *
@@ -122,11 +122,11 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Shows the given element(s) (changes opacity and display attributes).
+		 * Makes the given element(s) visible (changes visibility and display attributes).
 		 *
 		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 */
-		this.show = function(selector) {
+		this.makeVisible = function(selector) {
 			if ( ! selector) {
 				return;
 			}
@@ -136,7 +136,7 @@ if (typeof window.Regular === 'undefined'
 				: selector;
 
 			if ('forEach' in element) {
-				element.forEach(subElement => $.show(subElement));
+				element.forEach(subElement => $.makeVisible(subElement));
 				return;
 			}
 
@@ -158,6 +158,29 @@ if (typeof window.Regular === 'undefined'
 			}
 
 			element.style.visibility = 'visible';
+		};
+
+		/**
+		 * Shows the given element(s) (makes visible and changes opacity attribute).
+		 *
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 */
+		this.show = function(selector) {
+			if ( ! selector) {
+				return;
+			}
+
+			const element = typeof selector === 'string'
+				? document.querySelectorAll(selector)
+				: selector;
+
+			if ('forEach' in element) {
+				element.forEach(subElement => $.show(subElement));
+				return;
+			}
+
+			this.makeVisible(element);
+
 			element.style.opacity    = 1;
 		};
 
@@ -192,7 +215,7 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Fades in the the given element(s).
+		 * Fades in the given element(s).
 		 *
 		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 * @param duration    Optional duration of the effect in milliseconds.
@@ -206,6 +229,8 @@ if (typeof window.Regular === 'undefined'
 			const element = typeof selector === 'string'
 				? document.querySelectorAll(selector)
 				: selector;
+
+			this.makeVisible(element);
 
 			$.fadeTo(
 				element,
@@ -221,7 +246,7 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Fades out the the given element(s).
+		 * Fades out the given element(s).
 		 *
 		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 * @param duration    Optional duration of the effect in milliseconds.
@@ -250,7 +275,7 @@ if (typeof window.Regular === 'undefined'
 		};
 
 		/**
-		 * Fades out the the given element(s).
+		 * Fades out the given element(s).
 		 *
 		 * @param selector    A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 * @param opacity     Opacity Value to fade to
@@ -286,6 +311,8 @@ if (typeof window.Regular === 'undefined'
 
 				return;
 			}
+
+			this.makeVisible(element);
 
 			const direction = opacity > element.style.opacity ? 'in' : 'out';
 

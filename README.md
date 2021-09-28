@@ -16,6 +16,7 @@ This library contains a number of simple static javascript functions.
 [addClasses](#addclasses)<br>
 [removeClasses](#removeclasses)<br>
 [toggleClasses](#toggleclasses)<br>
+[makeVisible](#makeVisible)<br>
 [show](#show)<br>
 [hide](#hide)<br>
 [fadeIn](#fadein)<br>
@@ -186,9 +187,37 @@ Regular.toggleClasses(div, 'qux');
 
 ---
 
+## makeVisible
+
+Makes the given element(s) visible (changes visibility and display attributes).
+
+#### Syntax
+
+```javascript
+Regular.makeVisible(el)
+```
+
+| Parameter  | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
+
+#### Examples
+
+```html
+<div id="mydiv" style="display:none;">...</div>
+```
+```javascript
+Regular.makeVisible('#mydiv');
+
+const div = document.querySelector('#mydiv');
+Regular.makeVisible(div);
+```
+
+---
+
 ## show
 
-Shows the given element (changes opacity and display attributes).
+Shows the given element(s) (makes visible and changes opacity attribute).
 
 #### Syntax
 
@@ -203,7 +232,7 @@ Regular.show(el)
 #### Examples
 
 ```html
-<div id="mydiv" style="display:none;">...</div>
+<div id="mydiv" style="display:none;opacity:0;">...</div>
 ```
 ```javascript
 Regular.show('#mydiv');
@@ -244,7 +273,7 @@ Regular.hide('#mydiv');
 
 ## fadeIn
 
-Fades in the the given element.
+Fades in the given element.
 
 #### Syntax
 
@@ -274,7 +303,7 @@ Regular.fadeIn(div, 1000, () => console.log('Faded in'));
 
 ## fadeOut
 
-Fades out the the given element.
+Fades out the given element.
 
 #### Syntax
 
@@ -304,7 +333,7 @@ Regular.fadeOut(div, 1000, () => console.log('Faded out'));
 
 ## fadeTo
 
-Fades out the the given element.
+Fades out the given element.
 
 #### Syntax
 
