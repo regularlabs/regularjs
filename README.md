@@ -164,6 +164,7 @@ Regular.toggleClasses(selector, classes)
 | ---------- | ----------------------------------------------------------------------------------- |
 | `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
 | `classes`  | A string or array of class names.                                                   |
+| `force`    | A Boolean value that forces the class to be added or removed.                       |
 
 #### Examples
 
@@ -179,6 +180,12 @@ Regular.toggleClasses('#mydiv', 'bar baz');
 
 Regular.toggleClasses('#mydiv', ['bar', 'qux']);
 // => class="foo baz qux"
+
+Regular.toggleClasses('#mydiv', ['bar', 'qux'], true);
+// => class="foo bar baz qux"
+
+Regular.toggleClasses('#mydiv', ['bar', 'qux'], false);
+// => class="foo baz"
 
 const div = document.querySelector('#mydiv');
 Regular.toggleClasses(div, 'qux');

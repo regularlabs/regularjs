@@ -12,7 +12,7 @@
 
 if (typeof window.Regular === 'undefined'
 	|| typeof Regular.version === 'undefined'
-	|| Regular.version < 1.4) {
+	|| Regular.version < 1.5) {
 
 	window.Regular = new function() {
 		/**
@@ -21,7 +21,7 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 */
 
-		this.version = 1.4;
+		this.version = 1.5;
 
 		/**
 		 *
@@ -116,9 +116,22 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 * @param classes   A string or array of class names.
+		 * @param force     A Boolean value that forces the class to be added or removed.
 		 */
-		this.toggleClasses = function(selector, classes) {
-			doClasses('toggle', selector, classes);
+		this.toggleClasses = function(selector, classes, force) {
+			switch(force) {
+				case true:
+					doClasses('add', selector, classes);
+					break;
+
+				case false:
+					doClasses('remove', selector, classes);
+					break;
+
+				default:
+					doClasses('toggle', selector, classes);
+					break;
+			}
 		};
 
 		/**
@@ -181,7 +194,7 @@ if (typeof window.Regular === 'undefined'
 
 			this.makeVisible(element);
 
-			element.style.opacity    = 1;
+			element.style.opacity = 1;
 		};
 
 		/**
