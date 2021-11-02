@@ -116,10 +116,10 @@ if (typeof window.Regular === 'undefined'
 		 *
 		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
 		 * @param classes   A string or array of class names.
-		 * @param force     A Boolean value that forces the class to be added or removed.
+		 * @param force     An optional boolean value that forces the class to be added or removed.
 		 */
 		this.toggleClasses = function(selector, classes, force) {
-			switch(force) {
+			switch (force) {
 				case true:
 					doClasses('add', selector, classes);
 					break;
@@ -225,6 +225,41 @@ if (typeof window.Regular === 'undefined'
 			element.style.display    = 'none';
 			element.style.visibility = 'hidden';
 			element.style.opacity    = 0;
+		};
+
+		/**
+		 * Shows or hides the given element(s).
+		 *
+		 * @param selector  A CSS selector string, a HTMLElement object or a collection of HTMLElement objects.
+		 * @param force     An optional boolean value that forces the class to be added or removed.
+		 */
+		this.toggle = function(selector, force) {
+			if ( ! selector) {
+				return;
+			}
+
+			switch (force) {
+				case true:
+					$.show(selector);
+					break;
+
+				case false:
+					$.hide(selector);
+					break;
+
+				default:
+					const element = typeof selector === 'string'
+						? document.querySelectorAll(selector)
+						: selector;
+
+					if ('forEach' in element) {
+						element.forEach(subElement => $.toggle(subElement));
+						return;
+					}
+
+					element.style.display === 'none' ? $.show(selector) : $.hide(selector);
+					break;
+			}
 		};
 
 		/**

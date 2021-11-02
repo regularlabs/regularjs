@@ -19,6 +19,7 @@ This library contains a number of simple static javascript functions.
 [makeVisible](#makeVisible)<br>
 [show](#show)<br>
 [hide](#hide)<br>
+[toggle](#toggle)<br>
 [fadeIn](#fadein)<br>
 [fadeOut](#fadeout)<br>
 [fadeTo](#fadeto)<br>
@@ -164,7 +165,7 @@ Regular.toggleClasses(selector, classes)
 | ---------- | ----------------------------------------------------------------------------------- |
 | `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
 | `classes`  | A string or array of class names.                                                   |
-| `force`    | A Boolean value that forces the class to be added or removed.                       |
+| `force`    | An optional boolean value that forces the class to be added or removed.                       |
 
 #### Examples
 
@@ -271,6 +272,39 @@ Regular.hide(el)
 ```
 ```javascript
 Regular.hide(div);
+
+const div = document.querySelector('#mydiv');
+Regular.hide('#mydiv');
+```
+
+---
+
+## toggle
+
+Shows or hides the given element(s).
+
+#### Syntax
+
+```javascript
+Regular.hide(el)
+```
+
+| Parameter  | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `selector` | A CSS selector string, a HTMLElement object or a collection of HTMLElement objects. |
+| `force`    | An optional boolean value that forces the class to be added or removed.             |
+
+#### Examples
+
+```html
+<div id="mydiv">...</div>
+```
+```javascript
+Regular.toggle(div);
+
+Regular.toggle(div, true);
+
+Regular.toggle(div, foobar > 2);
 
 const div = document.querySelector('#mydiv');
 Regular.hide('#mydiv');
