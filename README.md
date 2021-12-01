@@ -26,6 +26,7 @@ This library contains a number of simple static javascript functions.
 [createElementFromHTML](#createelementfromhtml)<br>
 [onReady](#onready)<br>
 [loadUrl](#loadurl)<br>
+[toUrlQueryString](#toUrlQueryString)<br>
 [alias](#alias)<br>
 <br>
 [Function Aliases](#function-aliases)
@@ -467,7 +468,7 @@ Regular.loadUrl(url, data, success, fail)
 | `success` | Optional callback function to execute when the url loads successfully (status 200).  |
 | `fail`    | Optional callback function to execute when the url fails to load.                    |
 
-The result (responseText), status and the full XMLHttpRequest object will be passed to the callback functions. 
+The result (responseText), status and the full XMLHttpRequest object will be passed to the callback functions.
 
 #### Example
 
@@ -475,14 +476,69 @@ The result (responseText), status and the full XMLHttpRequest object will be pas
 Regular.loadUrl('my/url.php');
 
 Regular.loadUrl(
-	'my/url.php', 
-	'id=123&format=ajax', 
+	'my/url.php',
+	'id=123&format=ajax',
 	(result) => {
-		console.log('Yeah!'); 
-		console.log(result); 
-	}, 
+		console.log('Yeah!');
+		console.log(result);
+	},
 	(result, status) => console.log(`Oh no! Failed with status: ${status}`)
 );
+```
+
+---
+
+## toUrlQueryString
+
+Converts a data object (key, value) to a serialized query string.
+
+#### Syntax
+
+```javascript
+Regular.toUrlQueryString(data, prefix)
+```
+
+| Parameter | Description                            |
+| --------- | -------------------------------------- |
+| `data`    | The object with the data to serialize. |
+| `prefix`  | An Optional prefix.                    |
+
+#### Example
+
+```javascript
+const url_params = {
+	'id'     : 123,
+	'page'   : 'band',
+	'members': ['Peter', 'Paul', 'Mary'],
+};
+
+// Results in: index.php?id=123&page=band&members[]=Peter&members[]=Paul&members[]=Mary
+const url = 'index.php?' + Regular.toUrlQueryString(my_object);
+```
+```javascript
+const url_params = {
+	'page'   : 'band',
+	'members': {
+		'John'  : 'Lennon',
+		'Paul'  : 'McCartney',
+		'George': 'Harrison',
+		'Ringo' : 'Star',
+	},
+};
+
+// Results in: index.php?page=band&members[John]=Lennon&members[Paul]=McCartney&members[George]=Harrison&members[Ringo]=Star
+const url = 'index.php?' + Regular.toUrlQueryString(url_params);
+```
+```javascript
+const members = {
+	'John'  : 'Lennon',
+	'Paul'  : 'McCartney',
+	'George': 'Harrison',
+	'Ringo' : 'Star',
+};
+
+// Results in: index.php?members[John]=Lennon&members[Paul]=McCartney&members[George]=Harrison&members[Ringo]=Star
+const url = 'index.php?' + Regular.toUrlQueryString(members, 'members');
 ```
 
 ---
